@@ -1,0 +1,17 @@
+<script>
+    $(function(){
+        //progress status retrievement
+        var retrieveStatus = function()
+        {
+            $('#progress-modal').load('progress.php', function(){setTimeout(function(){retrieveStatus();}, 500);});
+        };
+        
+        //submit and trigger progress status retrievement
+        $('#database-form-submit').click(
+           function(){
+               $('#database-form').submit();
+               retrieveStatus();
+           }
+        );
+    });
+</script>

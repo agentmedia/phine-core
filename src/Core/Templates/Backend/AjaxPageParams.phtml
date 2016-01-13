@@ -1,0 +1,19 @@
+<form method="<?php HtmlOut($this->Method()); ?>" action="<?php HtmlOut(CurrentUri())?>">
+    <fieldset>
+        <legend><?php TransOut('Core.AjaxPageParams.Legend')?></legend>
+        <?php foreach ($this->oblParams as $element):?>
+        <?php echo $this->RenderElement($element); ?>
+        <?php endforeach;?>
+        <?php echo $this->RenderElement('OptionalParameters'); ?>
+        <?php echo $this->RenderElement('Fragment'); ?>
+    </fieldset>
+    <?php echo $this->RenderSubmit(); ?>
+</form>
+
+<script src="js/phine/ajax-modal-form.js"></script>
+<script>
+    $(function(){
+       var modalForm = new ajaxModalForm();
+       modalForm.init();
+    });
+</script>

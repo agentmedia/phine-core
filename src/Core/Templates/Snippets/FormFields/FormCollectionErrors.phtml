@@ -1,0 +1,12 @@
+<?php if ($this->collection->HasCollectionErrors()): ?>
+    <small class="error">
+        <?php foreach ($this->collection->GetValidators() as $validator): ?>
+        <?php $error = $validator->GetError() ?>
+        <?php if ($error): ?>
+        <span>
+            <?php HtmlOut($validator->GetError()); ?>
+         </span>
+         <?php endif; ?>
+         <?php endforeach ?>
+     </small>
+<?php endif ?>

@@ -1,0 +1,49 @@
+<tr data-tree-parent-id="<?php HtmlOut($this->ParentID()); ?>" data-tree-id="<?php echo $this->page->GetID() ?>">
+    <td>
+        <a class="tree-toggler"></a>
+            <?php HtmlOut($this->page->GetName())?>
+    </td>
+    <td>
+        <?php if ($this->CanCreateIn()): ?>
+        
+        <a class="tiny secondary button tree-cut-hidden fa fa-arrow-right" href="<?php HtmlOut($this->CreateInUrl()) ?>" title="<?php TransOut('Core.PageTree.CreateIn')?>"></a>
+        <?php endif; ?>
+        <?php if ($this->CanCreateAfter()): ?>
+        <a class="tiny secondary button tree-cut-hidden fa fa-arrow-down" href="<?php HtmlOut($this->CreateAfterUrl()) ?>" title="<?php TransOut('Core.PageTree.CreateAfter')?>"></a>
+        <?php endif; ?>
+        <?php if ($this->CanMove()): ?>
+        <a href="#" class="tiny button tree-insert-in fa fa-arrow-right" title="<?php TransOut('Core.PageTree.InsertIn')?>"></a>
+        <a href="#" class="tiny button tree-insert-after fa fa-arrow-down" title="<?php TransOut('Core.PageTree.InsertAfter')?>"></a>
+        <?php endif; ?>
+        <a href="#" title="<?php TransOut('Core.PageTree.EditArea')?>" data-dropdown="drop-<?php echo $this->page->GetID(); ?>" aria-controls="drop-<?php echo $this->page->GetID(); ?>" aria-expanded="false" class="tiny button fa dropdown tree-cut-hidden">
+            <span class="fa fa-ellipsis-v"></span>
+        </a>
+        
+        <ul id="drop-<?php echo $this->page->GetID(); ?>" data-dropdown-content class="f-dropdown" aria-hidden="true" tabindex="-1">
+            <?php foreach ($this->areas as $area): ?>
+            <li>    
+                <?php if ($this->IsLocked($area)): ?>
+                <span class="locked"> <?php HtmlOut($area->GetName()); ?></span>
+                <?php else: ?>
+                <a href="<?php HtmlOut($this->AreaUrl($area))?>"><?php HtmlOut($area->GetName()); ?></a>
+                <?php endif; ?>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+        <?php if ($this->CanMove()): ?>
+        <a class="tiny button fa fa-scissors tree-cutter" title="<?php TransOut('Core.PageTree.Cut')?>"></a>
+        <?php endif; ?>
+        
+        <?php if ($this->CanEdit()): ?>
+        <a class="tiny button fa fa-pencil tree-cut-hidden" href="<?php HtmlOut($this->EditUrl()) ?>" title="<?php TransOut('Core.PageTree.Edit')?>"></a>
+        <?php endif; ?>
+        
+        <?php if ($this->CanDelete()): ?>
+        <a class="tiny tree-remover alert button fa fa-remove tree-cut-hidden" title="<?php TransOut('Core.PageTree.Delete')?>" data-tree-remove-message="<?php TransOut('Core.ModalDelete.Description.Name_{0}', $this->page->GetName()) ?>"></a>
+        <?php endif; ?>
+    </td>
+</tr>
+<?php while ($child = $this->NextChild()): ?>
+<?php $row = new static($child); ?>
+<?php echo $row->Render(); ?>
+<?php endwhile; ?>

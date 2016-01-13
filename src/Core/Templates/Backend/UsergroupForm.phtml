@@ -1,0 +1,22 @@
+<h1><?php TransOut('Core.UsergroupForm.Title') ?></h1>
+<p>
+    <?php TransOut('Core.UsergroupForm.Description') ?>
+</p>
+<form method="post" action="<?php HtmlOut(CurrentUri()) ?>">
+    <fieldset>
+        <legend><?php TransOut('Core.UsergroupForm.Legend') ?></legend>
+        <?php echo $this->RenderElement('Name'); ?>
+        <div class="row">
+            <div class="medium-4 columns">
+                <?php echo $this->RenderElement('CreateSites') ?>
+            </div>
+            <div class="medium-4 columns">
+                <?php echo $this->RenderElement('CreateLayouts') ?>
+            </div>
+            <div class="medium-4 columns">
+                <?php echo $this->RenderElement('CreateContainers') ?>
+            </div>
+        </div>
+    </fieldset>
+    <?php echo $this->RenderSubmit(); ?>
+</form>

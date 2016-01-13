@@ -1,0 +1,29 @@
+<h1>Phine Installation: Administrator</h1>
+
+<p>
+    You're almost done. Set up the initial administrator account, now.
+</p>
+<form action="administrator.php" method="post">
+    <fieldset>
+        <legend>Administrator settings</legend>
+        <?php foreach ($this->fields as $field): ?>
+        
+        <label for="<?php echo $field ?>"><?php echo ucfirst($field) ?></label>
+        <?php if ($field == 'language') :?>
+        <select name="language" id="language">
+            <?php foreach ($this->languages as $language):?>
+            <option value="<?php echo $language->GetID() ?>">
+                <?php echo htmlspecialchars($language->GetName()); ?>
+            </option>
+            <?php endforeach; ?>
+        </select>
+        <?php else: ?>
+        <input id="<?php echo $field?>" type="<?php if ($field == 'password'): ?>password<?php else: ?>text<?php endif; ?>" name="<?php echo $field ?>" value="<?php echo htmlspecialchars($this->Value($field)) ?>"<?php if ($this->HasError($field)): ?> class="error"<?php endif ?> />
+        <?php endif; ?>
+        <?php if ($this->HasError($field)): ?>
+        <small class="error"><span><?php echo $this->Error($field) ?></span></small>
+        <?php endif; ?>
+        <?php endforeach; ?>
+    </fieldset>
+    <input type="submit" name="submit" value="submit" class="small button" />
+</form>

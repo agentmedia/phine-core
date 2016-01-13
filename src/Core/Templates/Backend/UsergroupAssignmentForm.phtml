@@ -1,0 +1,17 @@
+<h1><?php TransOut('Core.UsergroupAssignmentForm.Title') ?></h1>
+<p>
+    <?php TransOut('Core.UsergroupAssignmentForm.Description') ?>
+</p>
+<?php if (count($this->groups) == 0): ?>
+<p>
+    <?php TransOut('Core.UsergroupAssignmentForm.NoGroups'); ?>
+</p>
+<?php else: ?>
+<form method="post" action="<?php HtmlOut(CurrentUri()) ?>">
+    <fieldset>
+        <legend><?php TransOut('Core.UsergroupAssignmentForm.Legend') ?></legend>
+        <?php echo $this->groupCheckBoxes->Render(); ?>
+    </fieldset>
+    <?php echo $this->RenderSubmit(); ?>
+</form>
+<?php endif; ?>

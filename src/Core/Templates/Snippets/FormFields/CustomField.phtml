@@ -1,0 +1,20 @@
+<?php $field = $this->field; ?>
+<?php $name = $field->GetName() ?>
+<?php if ($this->field->GetLabel()): ?>
+<label for ="<?php echo $name?>"<?php if($field->CheckFailed()): ?> class="error"<?php endif; ?>><?php HtmlOut($field->GetLabel())?></label>
+<?php endif; ?>
+<div <?php foreach($this->attribs as $attrName=>$attrValue): ?> <?php echo $attrName ?>="<?php HtmlOut($attrValue)?>"<?php endforeach; ?>>
+<?php echo $this->field->Render(); ?>
+</div>
+    <?php if ($field->CheckFailed()): ?>
+<small class="error">
+    <?php foreach ($field->GetValidators() as $validator): ?>
+    <?php $error = $validator->GetError() ?>
+    <?php if ($error): ?>
+    <span>
+        <?php HtmlOut($validator->GetError()); ?>
+    </span>
+    <?php endif; ?>
+    <?php endforeach ?>
+</small>
+<?php endif; ?>

@@ -1,0 +1,19 @@
+<p>
+<?php if ($this->label): ?>
+<label<?php if ($this->CheckFailed()): ?> class="error"<?php endif;?>><?php HtmlOut($this->label); ?></label>
+<?php endif; ?>
+<a id="<?php HtmlOut($this->prefix); ?>OpenModal" title="<?php TransOut('Core.PageSelector.OpenModal')?>">
+<span class="page-url-full" id="<?php HtmlOut($this->prefix); ?>Name">
+    <?php if($this->name): ?>
+    <?php HtmlOut($this->name); ?>
+    <?php else: ?>
+    <?php TransOut('Core.PageSelector.NoPage') ?>
+    <?php endif; ?>
+</span>
+<span class="fa fa-pencil"></span>
+</a>
+<?php echo $this->RenderPageField(); ?>
+</p>
+
+
+

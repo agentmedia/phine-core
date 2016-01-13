@@ -1,0 +1,33 @@
+<h1><a href="<?php HtmlOut($this->BackLink()) ?>" class="fa fa-chevron-circle-left right" title="<?php TransOut('Core.ButtonText.Back')?>"></a><?php TransOut('Core.TemplateList.Title') ?></h1>
+<p><?php TransOut('Core.TemplateList.Description') ?></p>
+<div class="editable-list">
+<table>
+    <?php foreach ($this->bundles as $bundle): ?>
+    <tr class="head-row">
+        <th><?php echo $bundle; ?></th>
+        <th>
+            &nbsp;
+        </th>
+    </tr>
+    <?php $modules = $this->BundleModules($bundle); ?>
+    <?php foreach ($modules as $module): ?>
+    <tr class="sub-head-row">
+        <th><?php HtmlOut($module->MyName()); ?></th>
+        <td class="text-right">
+            <a href="<?php HtmlOut($this->FormUrl($module)); ?>" class="fa fa-arrow-right secondary tiny button" title="<?php TransOut('Core.TemplateList.Create') ?>"></a>
+        </td>
+    </tr>
+    <?php $templates = $this->ModuleTemplates($module) ?>
+    <?php foreach ($templates as $template): ?>
+    <tr class="sub-sub-head-row">
+        <th><?php HtmlOut($template); ?></th>
+        <td class="text-right">
+            <a href="<?php HtmlOut($this->FormUrl($module, $template)); ?>" class="fa fa-pencil tiny button" title="<?php TransOut('Core.TemplateList.Edit') ?>"></a>
+            <a href="#" class="delete-link fa fa-remove tiny alert button" data-id="<?php HtmlOut($this->TemplateID($module, $template)) ?>" data-description="<?php TransOut('Core.ModalDelete.Description.Name_{0}', $template) ?>" title="<?php TransOut('Core.TemplateList.Delete') ?>"></a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+    <?php endforeach; ?>
+    <?php endforeach; ?>
+</table>
+</div>    

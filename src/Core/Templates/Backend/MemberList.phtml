@@ -1,0 +1,36 @@
+<h1><a href="<?php HtmlOut($this->BackLink()) ?>" class="fa fa-chevron-circle-left right" title="<?php TransOut('Core.ButtonText.Back')?>"></a><?php TransOut('Core.MemberList.Title') ?></h1>
+<p>
+    <?php echo Trans('Core.MemberList.Description.Amount_{0}', count($this->members)) ?>
+</p>
+<?php if ($this->CanCreate()): ?>
+<p>
+    <a href="<?php HtmlOut($this->FormUrl())?>" class="secondary button fi-plus"> <?php TransOut('Core.MemberList.New') ?></a>
+</p>
+<?php endif; ?>
+<?php if (count($this->members) > 0): ?>
+<div class="editable-list">
+<table>
+    <thead>
+        <tr>
+            <th><?php TransOut('Core.MemberList.Name') ?></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->members as $member): ?>
+        <tr>
+            <td><?php HtmlOut($member->GetName()); ?></td>
+            <td>
+                <?php if ($this->CanEdit($member)): ?>
+                <a class="fa fa-pencil tiny button" href="<?php HtmlOut($this->FormUrl($member)) ?>" title="<?php TransOut('Core.MemberList.Edit') ?>"></a>
+                <?php endif; ?>
+                <?php if ($this->CanDelete($member)): ?>
+                <a href="#" class="delete-link fa fa-remove alert tiny button" data-id="<?php echo $member->GetID(); ?>" data-description="<?php TransOut('Core.ModalDelete.Description.Name_{0}', $member->GetName()) ?>" title="<?php TransOut('Core.MemberList.Delete') ?>"></a>
+                <?php endif;  ?>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+</div>
+<?php endif; ?>

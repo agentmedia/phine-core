@@ -1,0 +1,4 @@
+<?php $field = $this->field; ?>
+<?php $name = $field->GetName() ?>
+<?php $classes = $field->GetCssClasses() ?>
+<input <?php foreach($this->attribs as $attrName=>$attrValue): ?> <?php echo $attrName ?>="<?php HtmlOut($attrValue)?>"<?php endforeach; ?> type="submit" name="<?php echo $name ?>" class="button<?php foreach ($classes as $class):?> <?php HtmlOut($class) ?><?php endforeach; ?>" id="<?php echo $name ?>" value="<?php HtmlOut($field->GetNamingValue())?>" />

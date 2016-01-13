@@ -1,0 +1,27 @@
+<?php $attribs = $this->select->GetHtmlAttributes(); ?>
+<?php $name = $this->select->GetName(); ?>
+<?php if (key_exists('multiple', $attribs)){$name .= '[]';}?>
+<?php if ($this->select->GetLabel()): ?>
+<label for ="<?php echo $name?>"<?php if ($this->select->CheckFailed()): ?> class="error"<?php endif; ?>><?php HtmlOut($this->select->GetLabel()) ?></label>
+<?php endif; ?>
+<select<?php if ($this->select->CheckFailed()): ?> class="error"<?php endif; ?> name="<?php HtmlOut($name) ?>" id="<?php HtmlOut($name) ?>"<?php foreach($attribs as $key=>$value): ?> <?php echo Html($key)  .'="' . Html($value) . '"'?><?php endforeach ?>>
+    <?php $options = $this->select->GetOptions(); ?>
+    <?php foreach ($options as $value=>$text): ?>
+    <?php $optAttribs = $this->select->GetOptionAttributes($value); ?>
+    <?php $selVal = $this->select->GetValue(); ?>
+    <?php $selected = isset($selVal) && is_array($selVal) ? in_array($value, $selVal): $value == $selVal ?>
+    <option value="<?php HtmlOut($value) ?>"<?php if ($selected): ?> selected="selected"<?php endif ?><?php foreach($optAttribs as $name=>$val): ?> <?php echo Html($name) . '="' . Html($val) .'"' ?><?php endforeach;?>><?php HtmlOut($text) ?></option>
+    <?php endforeach; ?>
+</select>
+<?php if ($this->select->CheckFailed()): ?>
+<small class="error">
+    <?php foreach ($this->select->GetValidators() as $validator): ?>
+    <?php $error = $validator->GetError() ?>
+    <?php if ($error): ?>
+    <span>
+        <?php HtmlOut($error); ?>
+    </span>
+    <?php endif; ?>
+    <?php endforeach ?>
+</small>
+<?php endif; ?>

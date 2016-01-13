@@ -1,0 +1,11 @@
+<h1><a href="<?php HtmlOut($this->BackLink()) ?>" class="fa fa-chevron-circle-left right" title="<?php TransOut('Core.ButtonText.Back')?>"></a><?php TransOut('Core.ModuleForm.Title') ?></h1>
+<p>
+    <?php TransOut('Core.ModuleForm.Description') ?>
+</p>
+<form method="post" action="<?php HtmlOut(CurrentUri()) ?>">
+    <fieldset>
+        <legend><?php TransOut('Core.ModuleForm.Legend') ?></legend>
+        <?php echo $this->RenderElement('Module'); ?>
+    </fieldset>
+    <?php echo $this->RenderSubmit(); ?>
+</form>

@@ -1,0 +1,12 @@
+<?php if (count($this->fields)): ?>
+<div class="row">
+    <?php for ($col = 0; $col < $this->numColumns; ++$col): ?>
+    <div class="medium-<?php echo $this->colspan ?> columns">
+        <?php $fields = $this->columnFields[$col];?>
+        <?php foreach ($fields as $field): ?>
+        <?php echo $this->form->RenderElement($field); ?>
+        <?php endforeach; ?>
+    </div>
+    <?php endfor; ?>
+</div>
+<?php endif; ?>

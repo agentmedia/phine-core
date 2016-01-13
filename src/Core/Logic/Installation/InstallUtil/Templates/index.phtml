@@ -1,0 +1,18 @@
+<h1>Phine Installation: Password</h1>
+<p>
+    <?php if ($this->firstRun): ?>
+    Insert a password to protect the installer.
+    <?php else: ?>
+    Insert the install tool password.
+    <?php endif; ?>
+</p>
+<form action="index.php" method="post">
+    <fieldset>
+        <legend>Password</legend>
+        <input type="password" name="password"<?php if ($this->HasError('password')): ?> class="error"<?php endif ?> />
+        <?php if ($this->HasError('password')): ?>
+        <small class="error"><span><?php echo $this->Error('password') ?></span></small>
+        <?php endif; ?>
+    </fieldset>
+    <input type="submit" name="submit" value="submit" class="small button" />
+</form>

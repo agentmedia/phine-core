@@ -1,0 +1,16 @@
+<h1><?php TransOut('Core.UserForm.Title') ?></h1>
+<p>
+    <?php TransOut('Core.UserForm.Description') ?>
+</p>
+<form method="post" action="<?php HtmlOut(CurrentUri()) ?>">
+    <fieldset>
+        <legend><?php TransOut('Core.UserForm.Legend') ?></legend>
+        <?php echo $this->RenderElement('Name'); ?>
+        <?php echo $this->RenderElement('EMail'); ?>
+        <?php echo $this->RenderElement('Language'); ?>
+        <?php echo $this->RenderElement('IsAdmin'); ?>
+        <?php echo $this->RenderElement('Password'); ?>
+        <?php echo $this->RenderElement('PasswordRepeat'); ?>
+    </fieldset>
+    <?php echo $this->RenderSubmit(); ?>
+</form>

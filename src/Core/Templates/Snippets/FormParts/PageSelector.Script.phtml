@@ -1,0 +1,13 @@
+<script>
+    $(function(){
+        var button = $('#<?php HtmlOut($this->prefix)?>OpenModal');
+        $(button).click(function(e){
+            e.preventDefault();
+            var data = new Object();
+            data['prefix'] = '<?php HtmlOut($this->prefix) ?>';
+            data['page'] = $('#<?php HtmlOut($this->prefix . 'Page') ?>').val();
+            $('#ajax-modal').foundation('reveal', 'open', 
+                '<?php echo($this->OpenUrl()); ?>&' + $.param(data));
+        });
+    });
+</script>

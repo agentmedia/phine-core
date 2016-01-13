@@ -1,0 +1,22 @@
+{
+    "name": "agentmedia/phine-core",
+    "description": "The core bundle for the Phine CMS, including base backend functionality and an installer",
+    "license": "Apache License 2.0",
+	"type": "phine-bundle"
+    "homepage": "http://github.com/agentmedia/phine-core",
+    "authors": [
+        {
+            "name": "Klaus Potzesny",
+            "homepage": "http://www.agent-media.com/",
+            "role": "head developer",
+            "email": "info@agent-media.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+		"agentmedia/phine-framework"
+    },
+    "autoload" : {
+      "psr-4": { "Phine\\Bundles": "src/" }
+    }
+}

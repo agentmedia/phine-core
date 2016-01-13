@@ -1,0 +1,18 @@
+<h1><?php TransOut('Core.ModuleLockForm.Title') ?></h1>
+<p>
+    <?php TransOut('Core.ModuleLockForm.Description_{0}', $this->group->GetName()) ?>
+</p>
+<form method="post" action="<?php HtmlOut(CurrentUri()) ?>">
+    <fieldset>
+        <legend><?php TransOut('Core.ModuleLockForm.Legend') ?></legend>
+        <?php foreach ($this->Bundles() as $bundle): ?>
+        <fieldset>
+            <legend>
+                <?php echo $this->RenderElement($bundle)?>
+            </legend>
+            <?php echo $this->RenderModuleCheckBoxes($bundle); ?>
+        </fieldset>
+        <?php endforeach; ?>
+    </fieldset>
+    <?php echo $this->RenderSubmit(); ?>
+</form>

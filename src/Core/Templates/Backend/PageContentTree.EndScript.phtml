@@ -1,0 +1,10 @@
+<script src="js/phine/editable-tree.js"></script>
+<script src="js/phine/ajax-tree.js"></script>
+<script>
+    $(function(){
+        var tree = new ajaxTree('<?php echo $this->JsonUrl()?>', '#tree');
+        <?php if ($this->selected): ?>
+        tree.showTreeID('<?php HtmlOut($this->selected->GetID())?>');
+        <?php endif; ?> 
+    });
+</script>

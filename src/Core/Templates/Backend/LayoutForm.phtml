@@ -1,0 +1,18 @@
+<h1><a href="<?php HtmlOut($this->BackLink()) ?>" class="fa fa-chevron-circle-left right" title="<?php TransOut('Core.ButtonText.Back')?>"></a><?php TransOut('Core.LayoutForm.Title') ?></h1>
+<p>
+    <?php TransOut('Core.LayoutForm.Description') ?>
+</p>
+<form method="post" action="<?php HtmlOut(CurrentUri()) ?>">
+    <fieldset>
+        <legend><?php TransOut('Core.LayoutForm.Legend') ?></legend>
+        <?php echo $this->RenderElement('Name'); ?>
+        <?php echo $this->RenderElement('Areas'); ?>
+        <?php if ($this->CanAssignGroup()): ?>
+        <?php echo $this->RenderElement('UserGroup'); ?>
+        <div id="group-rights">
+            <?php echo $this->layoutRights->Render(); ?>
+        </div>
+        <?php endif; ?>
+    </fieldset>
+    <?php echo $this->RenderSubmit(); ?>
+</form>

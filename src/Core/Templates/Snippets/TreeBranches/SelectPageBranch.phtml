@@ -1,0 +1,13 @@
+<tr data-tree-parent-id="<?php HtmlOut($this->ParentID()); ?>" data-tree-id="<?php echo $this->page->GetID() ?>">
+    <td>
+        <a class="tree-toggler"></a>
+        <label class="inline" for="page-radio-<?php HtmlOut($this->page->GetID()) ?>"><?php HtmlOut($this->page->GetName()) ?></label>
+    </td>
+    <td>
+        <input type="radio"<?php if ($this->disabled): ?> disabled="disabled"<?php endif; ?> id="page-radio-<?php HtmlOut($this->page->GetID()) ?>" name="page" value="<?php HtmlOut($this->page->GetID())?>"<?php if ($this->checked): ?> checked="checked"<?php endif; ?> />
+    </td>
+</tr>
+<?php while ($child = $this->NextChild()): ?>
+<?php $row = new static($child, $this->selected); ?>
+<?php echo $row->Render(); ?>
+<?php endwhile; ?>

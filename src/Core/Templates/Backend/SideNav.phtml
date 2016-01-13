@@ -1,0 +1,12 @@
+<?php use Phine\Bundles\Core\Logic\Routing\BackendRouter; ?>
+<ul class="side-nav">
+    
+    <?php foreach($this->bundleModules as $bundle=>$modules): ?>
+    <li><h5><?php TransOut("$bundle.NavTitle") ?></h5></li>
+    <?php foreach($modules as $instance): ?>
+    <?php $module = $instance->MyName()?>
+    <li><a href="<?php HtmlOut(BackendRouter::ModuleUrl($instance)) ?>"><?php TransOut("$bundle.$module.NavTitle") ?></a></li>
+    <?php endforeach; ?>
+    <li class="divider"></li>
+    <?php endforeach;?>
+</ul>

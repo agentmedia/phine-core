@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><?php echo htmlspecialchars($this->StepText()); ?> - Phine Install Util</title>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700,400italic,700italic|Lobster+Two:700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="../css/foundation.css" />
+    
+    <link rel="stylesheet" href="../foundation-icons/foundation-icons.css" />
+    <link rel="stylesheet" href="../Font-Awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../css/custom.css" />
+    
+</head>
+<body>
+    <header>
+        <div class="row show-for-large-up">
+            <div class="large-12 columns">
+                <div id="logo">
+                    <a href="#">Phine &CenterDot; CMS</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div id="contents">
+        <div class="row">
+            <aside class="large-2 columns">
+                <ul class="side-nav">
+                    <li><h5>Install Steps</h5></li>
+                    <?php $index = 1; ?>
+                    <?php $reachedStep = false; ?>
+                    
+                    <?php foreach (self::Steps() as $step=>$text): ?>
+                    <li><?php if ($step == $this->content->Step()):?>
+                        <strong><?php echo $index  ?>. <?php echo htmlspecialchars($text) ?></strong>
+                        <?php else: ?>
+                        <?php echo $index  ?>. <?php echo $text ?>
+                        <?php endif; ?>
+                    </li>
+                    <?php ++$index; ?>
+                    <?php endforeach; ?>
+                </ul>
+            </aside>
+            <div class="large-10 columns">
+                <div class="panel">
+                   
+                    <?php echo $this->content->Render(); ?>
+                     <?php $warnings = $this->content->GetWarnings(); ?>
+                    <?php if (count($warnings) > 0): ?>
+                    <div class="alert-box warning">
+                        <h1>Some sub steps failed:</h1>
+                        <ul>
+                            <?php foreach($warnings as $warning): ?>
+                            <li><?php echo htmlspecialchars($warning) ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="row">
+            <div class="large-12 columns">
+            <ul class="inline-list">
+                <li>
+                    <a href="http://www.phine.info/imprint.html" target="_blank">&copy; agent media</a>
+                </li>
+            </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/vendor/modernizr.js"></script>
+    <script src="../js/vendor/jquery.js"></script>
+    <script src="../js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+    </script>
+    <?php echo $this->content->RenderEndScript(); ?>
+    </body>
+</html>

@@ -1,0 +1,81 @@
+<h1><a href="<?php HtmlOut($this->BackLink()) ?>" class="fa fa-chevron-circle-left right" title="<?php TransOut('Core.ButtonText.Back') ?>"></a><?php TransOut('Core.PageForm.Headline') ?></h1>
+<p>
+    <?php TransOut('Core.PageForm.Explanation') ?>
+</p>
+<form method="post" action="<?php HtmlOut(CurrentUri()) ?>">
+    <fieldset>
+        <legend><?php TransOut('Core.PageForm.Legend') ?></legend>
+        <?php echo $this->RenderElement('Name'); ?>
+        <?php echo $this->RenderElement('Url'); ?>
+        <?php echo $this->RenderElement('Layout'); ?>
+        <?php echo $this->RenderElement('Title'); ?>
+        <?php echo $this->RenderElement('Description'); ?>
+        <?php echo $this->RenderElement('Keywords'); ?>
+    </fieldset>
+    <fieldset>
+        <legend><?php TransOut('Core.PageForm.Type.Legend') ?></legend>
+        <?php echo $this->RenderElement('Type'); ?>
+        <div id="RedirectSelector">
+            <?php echo $this->selector->Render(); ?>
+        </div>
+    </fieldset>
+        <fieldset>
+            <legend><?php TransOut('Core.PageForm.Sitemap.Legend')?></legend>
+        <div class="row">
+            <div class="medium-6 columns">
+                <?php echo $this->RenderElement('SitemapRelevance'); ?>
+            </div>
+            <div class="medium-6 columns">
+                <?php echo $this->RenderElement('SitemapChangeFrequency'); ?>
+            </div>
+         </div>
+        </fieldset>
+        <fieldset>
+            <legend><?php TransOut('Core.PageForm.Access.Legend'); ?></legend>
+        <?php echo $this->RenderElement('MenuAccess'); ?>
+
+        <?php echo $this->RenderElement('Publish'); ?>
+        <div class="row" id="PublishTimes">
+            <div class="medium-6 columns">
+                <div class="row">
+                    <div class="medium-6 columns">
+                        <?php echo $this->RenderElement('PublishFromDate'); ?>
+
+                    </div>
+                    <div class="medium-3 columns">
+                        <?php echo $this->RenderElement('PublishFromHour'); ?>
+                    </div>
+                    <div class="medium-3 columns">
+                        <?php echo $this->RenderElement('PublishFromMinute'); ?>
+                    </div>
+                </div>
+            </div>
+            <div class="medium-6 columns">
+                <div class="row">
+                    <div class="medium-6 columns">
+                        <?php echo $this->RenderElement('PublishToDate'); ?>
+
+                    </div>
+                    <div class="medium-3 columns">
+                        <?php echo $this->RenderElement('PublishToHour'); ?>
+                    </div>
+                    <div class="medium-3 columns">
+                        <?php echo $this->RenderElement('PublishToMinute'); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <?php echo $this->RenderElement('GuestsOnly'); ?>
+        <?php if ($this->hasMemberGroups): ?>
+        <?php echo $this->RenderElement('MemberGroup'); ?>
+        <?php endif; ?>
+        <?php if ($this->CanAssignGroup()): ?>
+            <?php echo $this->RenderElement('UserGroup'); ?>
+            <div id="group-rights">
+                <?php echo $this->pageRights->Render(); ?>
+            </div>
+        <?php endif; ?>
+    </fieldset>
+    <?php echo $this->RenderSubmit(); ?>
+</form>

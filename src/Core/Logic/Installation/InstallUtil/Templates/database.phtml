@@ -1,0 +1,58 @@
+<div id="progress-modal" class="reveal-modal small" data-reveal="data-reveal" data-options="close_on_background_click:false">
+    <h1>
+        Installation Status
+    </h1>
+    <p><span class="fa fa-spinner"></span> Initializing: Please wait</p>
+</div>
+
+<h1>Phine Installation: Database</h1>
+<?php if ($this->connection): ?>
+    <?php if (!$this->needsUpdate): ?>
+        <p>
+            Yep, your database is already connected.
+        </p>
+        <h2>Your Options</h2>
+        <ul>
+            <li>
+                If you want to change the database connection, change the connection settings and submit the form below.
+            </li>
+            <li>
+                Tor Refresh the database model classes, submit the form without any changes.
+            </li>
+            <li>
+                Otherwise, continue to the next step.
+            </li>
+        </ul>
+        <p>
+            <a href="administrator.php" class="secondary button">Continue <span class="fa fa-chevron-right"></span></a>
+        </p>
+    <?php else: ?>
+        <p class="alert-box warning">
+            Your database is out of sync with the installed bundles. 
+            Submit the form below without changes to update the database.
+            If you want to change the database, fill it with the new credentials.
+        </p>
+    <?php endif; ?>    
+<?php else: ?>
+    <p>
+        Insert the database credentials. 
+    </p>
+<?php endif; ?>
+<form action="database.php" method="post" id="database-form">
+    <fieldset>
+        <legend>Database settings</legend>
+        <?php if ($this->HasError('-overall-')): ?>
+            <p class="alert-box alert">
+                <?php echo htmlspecialchars($this->Error('-overall-')); ?>
+            </p>
+        <?php endif; ?>
+        <?php foreach ($this->fields as $field): ?>
+            <label for="<?php echo $field ?>"><?php echo ucfirst($field) ?></label>
+            <input id="<?php echo $field ?>" type="text" name="<?php echo $field ?>" value="<?php echo htmlspecialchars($this->Value($field)) ?>"<?php if ($this->HasError($field)): ?> class="error"<?php endif ?> />
+            <?php if ($this->HasError($field)): ?>
+                <small class="error"><span><?php echo $this->Error($field) ?></span></small>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </fieldset>
+    <a class="small button" id="database-form-submit" data-reveal-id="progress-modal">submit</a>
+</form>

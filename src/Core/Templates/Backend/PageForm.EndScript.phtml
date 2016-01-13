@@ -1,0 +1,25 @@
+<?php use Phine\Bundles\Core\Logic\DBEnums\PageType ?>
+<?php echo $this->selector->RenderScript(); ?>
+<script>
+   $(function()
+    {
+        var typeSelect = $('#Type');
+        function toggleFields()
+        {
+            if ($(typeSelect).val() === '<?php echo PageType::RedirectTemporary() ?>' ||
+                $(typeSelect).val() === '<?php echo PageType::RedirectPermanent() ?>')
+            {
+                $('#RedirectSelector').show();
+            }
+            else
+            {
+                $('#RedirectSelector').hide();
+            }
+        }
+        toggleFields();
+        typeSelect.change(function()
+        {
+            toggleFields();
+        });
+    });
+</script>

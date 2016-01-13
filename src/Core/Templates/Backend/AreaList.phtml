@@ -1,0 +1,42 @@
+<h1><a href="<?php HtmlOut($this->BackLink()) ?>" class="fa fa-chevron-circle-left right" title="<?php TransOut('Core.ButtonText.Back')?>"></a><?php TransOut('Core.AreaList.Title') ?></h1>
+<p>
+    <?php TransOut('Core.AreaList.Description') ?>
+</p>
+<div id="tree" class="editable-tree">
+<table>
+    <tr class="open" data-tree-id="0">
+             
+            <td>
+                <strong><?php HtmlOut($this->layout->GetName()) ?></strong>
+            </td>
+            <td>
+                <?php if ($this->CanCreate()): ?>
+                <a class="fa fa-arrow-right tiny secondary button tree-cut-hidden" href="<?php TransOut($this->CreateFormUrl())?>" title="<?php TransOut('Core.AreaList.CreateStartArea')?>"></a>
+                <?php endif; ?>
+                <a class="fa fa-arrow-right tree-insert-in tiny button" title="<?php TransOut('Core.AreaList.InsertIn')?>"></a>
+                <a class="fa fa-times tree-clipboard tiny secondary button" title="<?php TransOut('Core.AreaList.CancelCut')?>"></a>
+            </td>
+    </tr>
+    <?php if ($this->hasAreas):?>
+    <?php while ($area = $this->NextArea()):?>
+    <tr data-tree-parent-id="0" data-tree-id="<?php echo $area->GetID(); ?>">
+        <td><?php HtmlOut($area->GetName()); ?></td>
+        <td>
+            <?php if ($this->CanCreate()): ?>
+            <a class="tiny secondary button tree-cut-hidden fa fa-arrow-down" href="<?php HtmlOut($this->CreateAfterUrl($area)) ?>" title="<?php TransOut('Core.AreaList.CreateAfter')?>"></a>
+            <?php endif; ?>
+            <a href="#" class="tiny button tree-insert-after fa fa-arrow-down" title="<?php TransOut('Core.AreaList.InsertAfter')?>"></a>
+            <a class="tiny button fa fa-scissors tree-cutter" title="<?php TransOut('Core.AreaList.Cut')?>"></a>
+            <?php if ($this->CanEdit($area)): ?>
+            <a class="tiny button fa fa-pencil tree-cut-hidden" href="<?php HtmlOut($this->EditUrl($area)) ?>" title="<?php TransOut('Core.AreaList.Edit')?>"></a>
+            <?php endif; ?>
+            <?php if ($this->CanDelete($area)): ?>
+            <a class="tiny tree-remover alert button fa fa-remove tree-cut-hidden" title="<?php TransOut('Core.AreaList.Delete')?>" data-tree-remove-message="<?php TransOut('Core.ModalDelete.Description.Name_{0}', $area->GetName()) ?>"></a>
+            <?php endif; ?>
+        </td>
+    </tr>
+    <?php endwhile; ?>
+    <?php endif; ?>
+</table>
+</div>
+<a href="<?php HtmlOut($this->BackLink())?>" class="button"><span class="fa fa-chevron-circle-left"></span> <?php TransOut('Core.AreaList.Back')?></a>

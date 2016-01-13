@@ -1,0 +1,41 @@
+<h1><a href="<?php HtmlOut($this->BackLink()) ?>" class="fa fa-chevron-circle-left right" title="<?php TransOut('Core.ButtonText.Back')?>"></a><?php TransOut('Core.UsergroupList.Title') ?></h1>
+<p>
+    <?php TransOut('Core.UsergroupList.Description.Amount_{0}', count($this->groups)) ?>
+</p>
+<?php if ($this->CanCreate()): ?>
+<p>
+    <a href="<?php HtmlOut($this->FormUrl())?>" class="secondary button fi-plus"> <?php TransOut('Core.UsergroupList.New') ?></a>
+</p>
+<?php endif; ?>
+<?php if (count($this->groups) > 0): ?>
+<div class="editable-list">
+<table>
+    <thead>
+        <tr>
+            <th><?php TransOut('Core.UsergroupList.Name') ?></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->groups as $group): ?>
+        <tr>
+            <td><?php HtmlOut($group->Name); ?></td>
+            <td>
+                <?php if ($this->CanEdit($group)): ?>
+                <a class="fa fa-pencil tiny button" href="<?php HtmlOut($this->FormUrl($group)) ?>" title="<?php TransOut('Core.UsergroupList.Edit') ?>"></a>
+                <?php endif; ?>
+                
+                <?php if ($this->CanLockModules($group)): ?>
+                <a href="<?php HtmlOut($this->ModuleLockFormUrl($group)) ?>" class="fa fa-list alert tiny button" title="<?php TransOut('Core.UsergroupList.LockModules') ?>">
+                    <span class="fa fa-lock"></sup></a>                
+                <?php endif; ?>
+                <?php if ($this->CanDelete($group)): ?>
+                <a href="#" class="delete-link fa fa-remove alert tiny button" data-id="<?php echo $group->GetID(); ?>" data-description="<?php TransOut('Core.ModalDelete.Description.Name_{0}', $group->GetName()) ?>" title="<?php TransOut('Core.UsergroupList.Delete') ?>"></a>
+                <?php endif; ?>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+</div>
+<?php endif; ?>

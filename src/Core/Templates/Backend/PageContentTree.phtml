@@ -1,0 +1,28 @@
+<h1><a href="<?php HtmlOut($this->BackLink()) ?>" class="fa fa-chevron-circle-left right" title="<?php TransOut('Core.ButtonText.Back')?>"></a><?php TransOut('Core.PageContentTree.Title') ?></h1>
+<p>
+    <?php TransOut('Core.PageContentTree.Description') ?>
+</p>
+
+<div id="tree" class="editable-tree">
+<table>
+    <tr class="open" data-tree-id="0">
+            <td>
+                <a class="tree-toggler"></a>
+                <strong><?php HtmlOut($this->page->GetName()) ?> &raquo; <?php HtmlOut($this->area->GetName()); ?></strong>
+            </td>
+            <td>
+                <?php if ($this->CanCreateIn()): ?>
+                <a class="fa fa-arrow-right tiny secondary button tree-cut-hidden" href="<?php TransOut($this->CreateFormUrl())?>" title="<?php TransOut('Core.PageContentTree.CreateStartElement')?>"></a>
+                <a class="fa fa-arrow-right tree-insert-in tiny button" title="<?php TransOut('Core.PageContentTree.InsertIn')?>"></a>
+                <?php endif; ?>
+                <a class="fa fa-times tree-clipboard tiny secondary button" title="<?php TransOut('Core.PageContentTree.CancelCut')?>"></a>
+            </td>
+    </tr>
+    <?php if ($this->hasContents): ?>
+    <?php while ($pageContent = $this->NextPageContent()):?>
+    <?php $branch = new Phine\Bundles\Core\Snippets\TreeBranches\PageContentBranch($pageContent); ?>
+    <?php echo $branch->Render(); ?>
+    <?php endwhile; ?>
+    <?php endif; ?>
+</table>
+</div>

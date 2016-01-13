@@ -1,0 +1,56 @@
+<form method="<?php HtmlOut($this->Method()); ?>" action="<?php HtmlOut(CurrentUri())?>">
+    <div class="editable-tree">
+        <table>
+            <tr>
+                <td>
+                    <label class="inline" for="page-none"><?php TransOut('Core.AjaxSelectPage.NoPage'); ?></label>
+                </td>
+                <td>
+                    <input type="radio" value="" id="page-none" name="page"<?php if (!$this->selected): ?> checked="checked"<?php endif;  ?> />
+                </td>
+            </tr>
+        </table>
+    </div>
+        
+<?php foreach ($this->sites as $site): ?>
+
+<?php if ($this->HasPages($site)):?>
+<div id="tree-<?php HtmlOut($site->GetID()) ?>" class="editable-tree">
+<table>
+    <tr data-tree-id="0">
+            <td>
+                <a class="tree-toggler"></a>
+                <strong><?php HtmlOut($site->GetName()) ?></strong>
+            </td>
+            <td>
+                &nbsp;
+            </td>
+    </tr>
+  
+    <?php while ($page = $this->NextPage()):?>
+    <?php $branch = new Phine\Bundles\Core\Snippets\TreeBranches\SelectPageBranch($page, $this->selected, $this->IsDisabled($page)); ?>
+    <?php echo $branch->Render(); ?>
+    <?php endwhile; ?>
+</table>
+</div>
+<?php endif; ?>
+<?php endforeach; ?>
+<script src="js/phine/editable-tree.js"></script>
+<script src="js/phine/ajax-modal-form.js"></script>
+
+<?php foreach ($this->sites as $site): ?>
+<?php if ($this->HasPages($site)):?>
+<script>
+ $(function(){
+    var tree = new editableTree('#tree-<?php HtmlOut($site->GetID()) ?>');
+    <?php if ($this->selected && $this->selected->GetSite()->Equals($site)): ?>        
+    tree.showTreeID('<?php HtmlOut($this->selected->GetID()) ?>');
+    <?php endif;?>
+    var modal = new ajaxModalForm();
+        modal.init();
+    });
+</script>
+<?php endif; ?>
+<?php endforeach; ?>
+<?php echo $this->RenderSubmit(); ?>
+</form>

@@ -1,0 +1,22 @@
+<?php $field = $this->field; ?>
+<?php $name = $field->GetName() ?>
+<p>    
+<label for="<?php echo $name ?>">
+      
+    <input<?php foreach($this->attribs as $attrName=>$attrValue): ?> <?php echo $attrName ?>="<?php echo HtmlOut($attrValue)?>"<?php endforeach; ?>  type="checkbox"<?php if ($field->IsChecked()):?> checked="checked"<?php endif ?> name="<?php echo $name?>" class="inline<?php if($field->CheckFailed()): ?> error<?php endif; ?>" id="<?php echo $name?>" value="<?php HtmlOut($field->GetCheckedValue())?>" />
+     <?php /* output label as is;  for checkboxes containing links... */ ?>
+        <?php echo $field->GetLabel() ?>
+     </label>
+<?php if ($field->CheckFailed()): ?>
+<small class="error">
+    <?php foreach ($field->GetValidators() as $validator): ?>
+    <?php $error = $validator->GetError() ?>
+    <?php if ($error): ?>
+    <span>
+        <?php HtmlOut($validator->GetError()); ?>
+    </span>
+    <?php endif; ?>
+    <?php endforeach ?>
+</small>
+<?php endif; ?>
+</p>

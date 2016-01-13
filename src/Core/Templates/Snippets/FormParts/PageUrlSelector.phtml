@@ -1,0 +1,21 @@
+<p>
+<?php if ($this->label): ?>
+<label<?php if ($this->CheckFailed()): ?> class="error"<?php endif;?>><?php HtmlOut($this->label); ?></label>
+<?php endif; ?>
+<a id="<?php HtmlOut($this->prefix); ?>OpenModal" title="<?php TransOut('Core.PageUrlSelector.OpenModal')?>">
+<span class="page-url-full" id="<?php HtmlOut($this->prefix); ?>Url">
+    <?php if($this->url): ?>
+    <?php HtmlOut($this->url); ?>
+    <?php else: ?>
+    <?php TransOut('Core.PageUrlSelector.NoPage') ?>
+    <?php endif; ?>
+</span>
+<span class="fa fa-pencil"></span>
+</a>
+<?php echo $this->RenderParamsField(); ?>
+<?php echo $this->RenderFragmentField(); ?>
+<?php echo $this->RenderPageField(); ?>
+</p>
+
+
+

@@ -1,0 +1,56 @@
+<h1><?php TransOut('Core.Overview.Title'); ?></h1>
+<p>
+<?php TransOut('Core.Overview.Description'); ?>
+</p>
+<p>
+    <a class="button" href="<?php HtmlOut($this->SettingsFormLink())?>"><?php TransOut('Core.Overview.Settings.LinkText') ?></a>
+</p>
+<?php foreach ($this->bundlesModules as $bundle=>$modules): ?>
+<div class ="panel bundle-overview">
+    <h3><?php echo TransOut($bundle .'.OverviewTitle') ?></h3>
+    <p>
+        <?php echo TransOut($bundle .'.OverviewDescription') ?>
+    </p>
+    <?php if (count($modules) > 1): ?>
+    <?php $modulesLR = $this->SeparateModules($modules); ?>
+    <div class="row">
+        <div class="medium-6 columns">
+            <ul>
+                <?php foreach ($modulesLR[0] as $module): ?>
+                <li>
+                    <h4><a href="<?php HtmlOut($this->ModuleUrl($module))?>"><?php echo TransOut($bundle .'.' .$module->MyName() . '.OverviewTitle'); ?></a></h4>
+                    <p>
+                        <?php echo TransOut($bundle .'.' . $module->MyName() . '.OverviewDescription'); ?>
+                    </p>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <div class="medium-6 columns">
+            <ul>
+                <?php foreach ($modulesLR[1] as $module): ?>
+                <li>
+                    <h4><a href="<?php HtmlOut($this->ModuleUrl($module))?>"><?php echo TransOut($bundle .'.' .$module->MyName() . '.OverviewTitle'); ?></a></h4>
+                    <p>
+                        <?php echo TransOut($bundle .'.' . $module->MyName() . '.OverviewDescription'); ?>
+                    </p>
+                </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+    <?php else: ?>
+    <ul>
+        <?php foreach ($modules as $module): ?>
+        <li>
+            <h4><a href="<?php HtmlOut($this->ModuleUrl($module))?>"><?php echo TransOut($bundle .'.' .$module->MyName() . '.OverviewTitle'); ?></a></h4>
+            <p>
+                <?php echo TransOut($bundle .'.' . $module->MyName() . '.OverviewDescription'); ?>
+            </p>
+        </li>
+        <?php endforeach; ?>
+    </ul>
+    <?php endif; ?>
+    
+</div>
+<?php endforeach; ?>

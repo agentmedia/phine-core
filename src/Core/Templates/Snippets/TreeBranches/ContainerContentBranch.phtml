@@ -1,0 +1,33 @@
+<tr data-tree-parent-id="<?php HtmlOut($this->ParentID()); ?>" data-tree-id="<?php echo $this->ItemID() ?>">
+    <td>
+        <a class="tree-toggler"></a>
+            <?php HtmlOut($this->DisplayName())?>
+    </td>
+    <td>
+        <?php if ($this->CanCreateIn()): ?>
+        <a class="tiny secondary button tree-cut-hidden fa fa-arrow-right" href="<?php HtmlOut($this->CreateInUrl()) ?>" title="<?php TransOut('Core.ContainerContentTree.CreateIn')?>"></a>
+        <?php endif; ?>
+        <?php if ($this->CanCreateAfter()):?>
+        <a class="tiny secondary button tree-cut-hidden fa fa-arrow-down" href="<?php HtmlOut($this->CreateAfterUrl()) ?>" title="<?php TransOut('Core.ContainerContentTree.CreateAfter')?>"></a>
+        <?php endif; ?>
+        <?php if ($this->CanCreateIn()): ?>
+        <a class="tiny button tree-insert-in fa fa-arrow-right" title="<?php TransOut('Core.ContainerContentTree.InsertIn')?>"></a>
+        <?php endif; ?>
+        <?php  if ($this->CanCreateAfter()): ?>
+        <a class="tiny button tree-insert-after fa fa-arrow-down" title="<?php TransOut('Core.ContainerContentTree.InsertAfter')?>"></a>
+        <?php endif ?>
+        <?php if ($this->CanMove()): ?>
+        <a class="tiny button fa fa-scissors tree-cutter" title="<?php TransOut('Core.ContainerContentTree.Cut')?>"></a>
+        <?php endif; ?>
+        <?php if ($this->CanEdit()): ?>
+        <a class="tiny button tree-cut-hidden fa fa-pencil" title="<?php TransOut('Core.ContainerContentTree.Edit')?>" href="<?php HtmlOut($this->EditUrl())?>"></a>
+        <?php endif; ?>
+        <?php  if ($this->CanDelete()): ?>
+        <a class="tiny tree-remover alert button fa fa-remove tree-cut-hidden" title="<?php TransOut('Core.ContainerContentTree.Delete')?>" data-tree-remove-message="<?php TransOut('Core.ModalDelete.Description.Name_{0}', $this->DisplayName()) ?>"></a>
+        <?php endif; ?>
+    </td>
+</tr>
+<?php while ($child = $this->NextChild()): ?>
+<?php $row = new static($child); ?>
+<?php echo $row->Render(); ?>
+<?php endwhile; ?>

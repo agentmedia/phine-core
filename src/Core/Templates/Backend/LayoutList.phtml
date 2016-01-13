@@ -1,0 +1,51 @@
+<h1><a href="<?php HtmlOut($this->BackLink()) ?>" class="fa fa-chevron-circle-left right" title="<?php TransOut('Core.ButtonText.Back')?>"></a><?php TransOut('Core.LayoutList.Title') ?></h1>
+<p>
+    <?php TransOut('Core.LayoutList.Description.Amount_{0}', count($this->layouts)) ?>
+</p>
+<?php if ($this->CanCreate()): ?>
+<p>
+    <a href="<?php HtmlOut($this->FormUrl())?>" class="secondary button fi-plus"> <?php TransOut('Core.LayoutList.New') ?></a>
+</p>
+<?php endif; ?>
+<?php if (count($this->layouts) > 0): ?>
+<div class="editable-list">
+<table>
+    <thead>
+        <tr>
+            <th><?php TransOut('Core.LayoutList.Name') ?></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->layouts as $layout): ?>
+        <tr>
+            <td><?php HtmlOut($layout->Name); ?></td>
+            <td>
+                
+                <a href="#" title="<?php TransOut('Core.LayoutList.EditArea')?>" data-dropdown="drop-<?php echo $layout->GetID(); ?>" aria-controls="drop-<?php echo $layout->GetID(); ?>" aria-expanded="false" class="tiny button fa dropdown tree-cut-hidden">
+                    <span class="fa fa-ellipsis-v"></span>
+                </a>
+                <ul id="drop-<?php echo $layout->GetID(); ?>" data-dropdown-content class="f-dropdown" aria-hidden="true" tabindex="-1">
+                    <?php foreach ($this->Areas($layout) as $area): ?>
+                    <li>
+                        <?php if ($this->IsLocked($area)): ?>
+                        <span class="locked"> <?php HtmlOut($area->GetName()); ?></span>
+                        <?php else: ?>
+                        <a href="<?php HtmlOut($this->AreaUrl($area))?>"><?php HtmlOut($area->GetName()); ?></a></li>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </ul>
+                <?php if ($this->CanEdit($layout)): ?>
+                <a class="fa fa-pencil tiny button" href="<?php HtmlOut($this->FormUrl($layout)) ?>" title="<?php TransOut('Core.LayoutList.Edit') ?>"></a>
+                <a class="fa fa-code tiny button" href="<?php HtmlOut($this->TemplateFormUrl($layout)) ?>" title="<?php TransOut('Core.LayoutList.EditTemplate') ?>"></a>
+                <?php endif; ?>
+                <?php if ($this->CanDelete($layout)): ?>
+                <a href="#" class="delete-link fa fa-remove alert tiny button" data-id="<?php echo $layout->GetID(); ?>" data-description="<?php TransOut('Core.ModalDelete.Description.Name_{0}', $layout->GetName()) ?>" title="<?php TransOut('Core.LayoutList.Delete') ?>"></a>
+                <?php endif; ?>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+</div>
+<?php endif; ?>

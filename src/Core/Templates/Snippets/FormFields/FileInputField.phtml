@@ -1,0 +1,19 @@
+<?php $field = $this->field; ?>
+<?php $name = $field->GetName() ?>
+<label for ="<?php echo $name?>"<?php if($field->CheckFailed()): ?> class="error"<?php endif; ?>><?php HtmlOut($field->GetLabel())?></label>
+<?php if ($this->previewImage): ?>
+<img src="<?php HtmlOut($this->previewImage) ?>" alt="" class="upload-preview"/>
+<?php endif; ?>
+<input <?php foreach($this->attribs as $attrName=>$attrValue): ?> <?php echo $attrName ?>="<?php echo HtmlOut($attrValue)?>"<?php endforeach; ?> type="<?php echo HtmlOut($field->GetType()) ?>" name="<?php echo $name ?>"<?php if ($field->CheckFailed()): ?> class="error"<?php endif; ?> id="<?php echo $name ?>" value="<?php echo HtmlOut($field->GetValue())?>" />
+<?php if ($field->CheckFailed()): ?>
+<small class="error">
+    <?php foreach ($field->GetValidators() as $validator): ?>
+    <?php $error = $validator->GetError() ?>
+    <?php if ($error): ?>
+    <span>
+        <?php HtmlOut($validator->GetError()); ?>
+    </span>
+    <?php endif; ?>
+    <?php endforeach ?>
+</small>
+<?php endif; ?>

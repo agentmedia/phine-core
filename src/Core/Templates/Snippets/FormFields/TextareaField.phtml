@@ -1,0 +1,19 @@
+<?php use Phine\Framework\System\String; ?>
+<?php $field = $this->field; ?>
+<?php $name = $field->GetName() ?>
+<?php if ($this->field->GetLabel()): ?>
+<label for ="<?php echo $name?>"<?php if($field->CheckFailed()): ?> class="error"<?php endif; ?>><?php HtmlOut($field->GetLabel())?></label>
+<?php endif; ?>
+<textarea <?php foreach($this->attribs as $attrName=>$attrValue): ?> <?php echo $attrName ?>="<?php echo HtmlOut($attrValue)?>"<?php endforeach; ?>  name="<?php echo $name?>"<?php if($field->CheckFailed()): ?> class="error"<?php endif; ?> id="<?php echo $name?>" ><?php HtmlOut($field->GetValue())?></textarea>
+<?php if ($field->CheckFailed()): ?>
+<small class="error">
+    <?php foreach ($field->GetValidators() as $validator): ?>
+    <?php $error = $validator->GetError() ?>
+    <?php if ($error): ?>
+    <span>
+        <?php HtmlOut($error); ?>
+    </span>
+    <?php endif; ?>
+    <?php endforeach ?>
+</small>
+<?php endif; ?>

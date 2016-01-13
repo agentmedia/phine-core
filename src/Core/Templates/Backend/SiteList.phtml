@@ -1,0 +1,36 @@
+<h1><a href="<?php HtmlOut($this->BackLink()) ?>" class="fa fa-chevron-circle-left right" title="<?php TransOut('Core.ButtonText.Back')?>"></a><?php TransOut('Core.SiteList.Title') ?></h1>
+<p>
+    <?php echo Trans('Core.SiteList.Description.Amount_{0}', count($this->sites)) ?>
+</p>
+<?php if ($this->CanCreate()): ?>
+<p>
+    <a href="<?php HtmlOut($this->FormUrl())?>" class="secondary button fi-plus"> <?php TransOut('Core.SiteList.New') ?></a>
+</p>
+<?php endif; ?>
+<?php if (count($this->sites)): ?>
+<div class="editable-list">
+<table>
+    <thead>
+        <tr>
+            <th><?php TransOut('Core.SiteList.Name') ?></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->sites as $site): ?>
+        <tr>
+            <td><?php HtmlOut($site->GetName()); ?></td>
+            <td><a class="fa fa-files-o tiny button" href="<?php HtmlOut($this->PageTreeUrl($site)) ?>" title="<?php TransOut('Core.SiteList.PageTree') ?>"></a>
+                <?php if ($this->CanEdit($site)): ?>
+                <a class="fa fa-pencil tiny button" href="<?php HtmlOut($this->FormUrl($site)) ?>" title="<?php TransOut('Core.SiteList.Edit') ?>"></a>
+                <?php endif; ?>
+                <?php if ($this->CanDelete($site)): ?>
+                <a href="#" class="delete-link fa fa-remove alert tiny button" data-id="<?php echo $site->GetID(); ?>" data-description="<?php TransOut('Core.ModalDelete.Description.Name_{0}', $site->GetName()) ?>" title="<?php TransOut('Core.SiteList.Delete') ?>"></a>
+                <?php endif;  ?>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+</div>
+<?php endif; ?>

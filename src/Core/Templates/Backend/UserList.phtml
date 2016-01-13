@@ -1,0 +1,49 @@
+<h1><a href="<?php HtmlOut($this->BackLink()) ?>" class="fa fa-chevron-circle-left right" title="<?php TransOut('Core.ButtonText.Back')?>"></a><?php TransOut('Core.UserList.Title') ?></h1>
+<p>
+    <?php TransOut('Core.UserList.Description.Amount_{0}', count($this->users)) ?>
+</p>
+<?php if ($this->CanCreate()): ?>
+<p>
+    <a href="<?php HtmlOut($this->FormUrl())?>" class="secondary button fi-plus"> <?php TransOut('Core.UserList.New') ?></a>
+</p>
+<?php endif; ?>
+<?php if (count($this->users) > 0): ?>
+<div class="editable-list">
+<table>
+    <thead>
+        <tr>
+            <th><?php TransOut('Core.UserList.Name') ?></th>
+            <th class="text-center"><?php TransOut('Core.UserList.IsAdmin') ?></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->users as $user): ?>
+        <tr>
+            <td><?php HtmlOut($user->Name); ?></td>
+            <td class="text-center">
+                <?php if ($user->GetIsAdmin()): ?>
+                <span class="fa fa-check "></span>
+                
+                <?php else: ?>
+                <span class="fa fa-minus"></span>
+                <?php endif; ?>
+            </td>
+            <td>
+                <?php if ($this->CanAssignGroups($user)): ?>
+                <a class="fa fa-users tiny button" href="<?php HtmlOut($this->GroupsFormUrl($user)) ?>" title="<?php TransOut('Core.UserList.EditGroups') ?>"></a>
+                <?php endif; ?>
+                <?php if ($this->CanEdit($user)): ?>
+              
+                <a class="fa fa-pencil tiny button" href="<?php HtmlOut($this->FormUrl($user)) ?>" title="<?php TransOut('Core.UserList.Edit') ?>"></a>
+                <?php endif; ?>
+                <?php if ($this->CanDelete($user)): ?>
+                <a href="#" class="delete-link fa fa-remove alert tiny button" data-id="<?php echo $user->GetID(); ?>" data-description="<?php TransOut('Core.ModalDelete.Description.Name_{0}', $user->GetName()) ?>" title="<?php TransOut('Core.UserList.Delete') ?>"></a>
+                <?php endif; ?>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+</div>
+<?php endif; ?>

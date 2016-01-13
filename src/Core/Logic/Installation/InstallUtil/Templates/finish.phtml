@@ -1,0 +1,17 @@
+<h1>Installation complete</h1>
+<?php if ($this->showWarning): ?>
+<p class="warning alert-box">
+    Your Phine installation is ready to use but there were errors installing some bundles.
+</p>
+<?php else:?>
+<p class="success alert-box radius">
+    Phine Installation successfully completed!
+</p>
+<?php endif; ?>
+<p>
+    Click the button below to login to the Phine backend
+</p>
+<p>
+    <a class="large button" href="<?php echo htmlspecialchars($this->LoginUrl()) ?>">Phine Backend <span class="fa fa-chevron-right"></span></a>
+</p>
+

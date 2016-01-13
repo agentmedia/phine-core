@@ -1,0 +1,28 @@
+<?php
+    $field = $this->field;
+    $name = $field->GetName();
+?>
+<fieldset<?php foreach($this->attribs as $attrName=>$attrValue): ?> <?php echo $attrName ?>="<?php echo HtmlOut($attrValue)?>"<?php endforeach; ?>>
+    <legend><?php HtmlOut($field->GetLabel()) ?></legend>
+    <?php $idx = 1; ?>
+    <?php foreach ($field->GetOptions() as $value=>$text): ?>
+   
+        <label for="<?php HtmlOut($name) ?>-<?php HtmlOut($idx) ?>">
+            <input name="<?php HtmlOut($name) ?>[]" id="<?php HtmlOut($name) ?>-<?php HtmlOut($idx) ?>" type="checkbox" value="<?php HtmlOut($value) ?>"<?php if ($field->IsSelected($value)): ?> checked="checked"<?php endif; ?> />
+            <?php HtmlOut($text) ?>
+        </label>
+    
+    <?php ++$idx; endforeach; ?>
+    <?php if ($field->CheckFailed()): ?>
+    <small class="error">
+        <?php foreach ($field->GetValidators() as $validator): ?>
+        <?php $error = $validator->GetError() ?>
+        <?php if ($error): ?>
+        <span>
+            <?php HtmlOut($validator->GetError()); ?>
+        </span>
+        <?php endif; ?>
+        <?php endforeach ?>
+    </small>
+    <?php endif; ?>
+</fieldset>

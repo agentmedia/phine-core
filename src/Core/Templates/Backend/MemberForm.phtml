@@ -1,0 +1,23 @@
+<h1><a href="<?php HtmlOut($this->BackLink()) ?>" class="fa fa-chevron-circle-left right" title="<?php TransOut('Core.ButtonText.Back')?>"></a><?php TransOut('Core.MemberForm.Title') ?></h1>
+<p>
+    <?php TransOut('Core.MemberForm.Description') ?>
+</p>
+<form method="post" action="<?php HtmlOut(CurrentUri()) ?>">
+    <fieldset>
+        <legend><?php TransOut('Core.MemberForm.Legend') ?></legend>
+            <div class="row">
+                <div class="medium-6 columns">
+                    <?php echo $this->RenderElement('EMail'); ?>
+                </div>
+                <div class="medium-6 columns">
+                
+                    <?php echo $this->RenderElement('Name'); ?>
+                </div>
+            </div>
+            <?php echo $this->RenderElement('Password'); ?>
+            <?php if ($this->groupsExist): ?>
+            <?php echo $this->RenderElement('MemberGroup'); ?>
+            <?php endif; ?>
+    </fieldset>
+    <?php echo $this->RenderSubmit(); ?>
+</form>
