@@ -14,7 +14,7 @@
     ],
     "require": {
         "php": ">=5.3.0",
-		"agentmedia/phine-framework"
+		"agentmedia/phine-framework" : "*"
     },
     "autoload" : {
       "psr-4": { "Phine\\Bundles": "src/" }
