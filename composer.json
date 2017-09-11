@@ -2,8 +2,8 @@
     "name": "agentmedia/phine-core",
     "description": "The core bundle for the Phine CMS, including base backend functionality and an installer",
     "license": "Apache License 2.0",
-	"type": "phine-bundle"
-    "homepage": "http://github.com/agentmedia/phine-core",
+	"type": "phine-bundle",
+    "homepage": "https://github.com/agentmedia/phine-core",
     "authors": [
         {
             "name": "Klaus Potzesny",
