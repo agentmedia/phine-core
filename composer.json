@@ -17,6 +17,6 @@
 		"agentmedia/phine-framework" : "*"
     },
     "autoload" : {
-      "psr-4": { "Phine\\Bundles": "src/" }
+      "psr-4": { "Phine\\Bundles\\": "src/" }
     }
 }
