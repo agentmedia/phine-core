@@ -1,9 +1,7 @@
 <?php
 
 namespace Phine\Bundles\Core\Logic\Rendering;
-use Phine\Database\Core\Area;
-use Phine\Database\Access;
-use Phine\Database\Core\LayoutContent;
+use App\Phine\Database\Core\Area;
 
 use Phine\Bundles\Core\Logic\Tree\LayoutContentTreeProvider;
 use Phine\Bundles\Core\Logic\Rendering\ContentsRenderer;

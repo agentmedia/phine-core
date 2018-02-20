@@ -3,7 +3,7 @@ namespace Phine\Bundles\Core\Snippets\FormFields;
 use Phine\Framework\FormElements\Fields\Input;
 use Phine\Bundles\Core\Logic\Snippet\TemplateSnippet;
 /**
- * Renders an input field of type text and its label before
+ * Renders an input field of type file and its label before
  */
 class FileInputField extends TemplateSnippet
 {

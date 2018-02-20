@@ -4,18 +4,18 @@ use Phine\Framework\System\Http\Request;
 use Phine\Framework\FormElements\Fields\Input;
 
 use Phine\Bundles\Core\Logic\Module\BackendForm;
-use Phine\Database\Core\Layout;
-use Phine\Database\Core\Area;
+use App\Phine\Database\Core\Layout;
+use App\Phine\Database\Core\Area;
 use Phine\Framework\Validation\DatabaseCount;
 use Phine\Framework\System\Http\Response;
 use Phine\Bundles\Core\Logic\Routing\BackendRouter;
-use Phine\Database\Access;
-use Phine\Framework\System\String;
+use App\Phine\Database\Access;
+use Phine\Framework\System\Str;
 use Phine\Framework\System\IO\File;
 use Phine\Bundles\Core\Logic\Util\PathUtil;
 use Phine\Framework\System\Php\Writer;
 use Phine\Bundles\Core\Logic\Util\DBSelectUtil;
-use Phine\Database\Core\Usergroup;
+use App\Phine\Database\Core\Usergroup;
 use Phine\Bundles\Core\Snippets\BackendRights\LayoutRights;
 use Phine\Framework\FormElements\Fields\Select;
 use Phine\Bundles\Core\Logic\Access\Backend\Enums\BackendAction;
@@ -190,7 +190,7 @@ class LayoutForm extends BackendForm
         $prev = null;
         foreach ($names as $name)
         {
-            $name = String::Trim($name);
+            $name = Str::Trim($name);
             if (!$this->AreaNameExists($name))
             {
                 $area = new Area();

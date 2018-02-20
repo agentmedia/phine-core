@@ -11,6 +11,7 @@ abstract class BackendForm extends BackendModule
     * Adds a field with the default rich text editor
     * @param string $name The field name
     * @param string $value The field value
+    * @return Custom Returns the custom field containing the RT Editor
     */
    protected function AddRichTextField($name, $value = '')
    {
@@ -20,6 +21,7 @@ abstract class BackendForm extends BackendModule
         $field->SetName($name);
         $field->SetValue($value);
         $this->AddField($field);
+        return $field;
    }
 }
 

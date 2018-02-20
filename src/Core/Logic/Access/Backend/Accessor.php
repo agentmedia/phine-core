@@ -3,7 +3,7 @@
 namespace Phine\Bundles\Core\Logic\Access\Backend;
 
 use Phine\Framework\Access\Interfaces as AccessInterfaces;
-use Phine\Database\Core\User;
+use App\Phine\Database\Core\User;
 
 
 /**

@@ -1,5 +1,5 @@
 <?php
-use Phine\Framework\System\String;
+use Phine\Framework\System\Str;
 use Phine\Framework\System\HtmlQuoteMode;
 use Phine\Framework\System\IO\File;
 use Phine\Framework\Wording\Worder;
@@ -13,7 +13,7 @@ use Phine\Framework\System\Http\Request;
  */
 function Html($string, HtmlQuoteMode $mode = null)
 {
-    return String::ToHtml($string, $mode);
+    return Str::ToHtml($string, $mode);
 }
 
 /**
@@ -32,7 +32,7 @@ function HtmlOut($string, HtmlQuoteMode $mode = null)
  */
 function JsVarOut($string, $htmlEncode = false)
 {
-    echo String::ToJavascript($string, $htmlEncode);
+    echo Str::ToJavascript($string, $htmlEncode);
 }
 function Trans($string)
 {
@@ -44,6 +44,16 @@ function Trans($string)
 function TransArgs($string, array $args)
 {
     return Worder::ReplaceArgs($string, $args);
+}
+
+/**
+ * Checks if the translation exists
+ * @param string $string
+ * @return boolean Returns true if the replacement is given
+ */
+function TransExists($string)
+{
+    return Worder::HasReplacement($string);
 }
 
 /**

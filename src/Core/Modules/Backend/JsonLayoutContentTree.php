@@ -3,7 +3,7 @@
 namespace Phine\Bundles\Core\Modules\Backend;
 
 use Phine\Bundles\Core\Modules\Backend\Base\JsonTree;
-use Phine\Database\Core\LayoutContent;
+use App\Phine\Database\Core\LayoutContent;
 use Phine\Bundles\Core\Logic\Tree\LayoutContentTreeProvider;
 use Phine\Bundles\Core\Logic\Module\BackendModule;
 use Phine\Bundles\Core\Logic\Logging\Logger;

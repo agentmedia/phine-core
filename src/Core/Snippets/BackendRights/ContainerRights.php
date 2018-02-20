@@ -1,7 +1,7 @@
 <?php
 
 namespace Phine\Bundles\Core\Snippets\BackendRights;
-use Phine\Database\Core\BackendContainerRights;
+use App\Phine\Database\Core\BackendContainerRights;
 use Phine\Bundles\Core\Snippets\BackendRights\Base\RightsCheckboxes;
 
 /**

@@ -158,3 +158,7 @@ ALTER TABLE `pc_core_log_container`
 
 ALTER TABLE `pc_core_page`
   ADD CONSTRAINT `pc_core_page_ibfk_9` FOREIGN KEY (`RedirectTarget`) REFERENCES `pc_core_page_url` (`ID`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- New in 1.2.3 --
+ALTER TABLE `pc_core_member_change_request`
+  ADD CONSTRAINT `pc_core_member_change_request_ibfk_1` FOREIGN KEY (`Member`) REFERENCES `pc_core_member` (`ID`) ON DELETE CASCADE ON UPDATE CASCADE;

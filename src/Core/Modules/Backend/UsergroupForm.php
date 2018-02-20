@@ -4,7 +4,7 @@ use Phine\Framework\System\Http\Request;
 use Phine\Framework\System\Http\Response;
 use Phine\Bundles\Core\Logic\Routing\BackendRouter;
 use Phine\Bundles\Core\Logic\Module\BackendForm;
-use Phine\Database\Core\Usergroup;
+use App\Phine\Database\Core\Usergroup;
 use Phine\Framework\FormElements\Fields\Input;
 use Phine\Framework\Validation\DatabaseCount;
 use Phine\Framework\FormElements\Fields\Checkbox;

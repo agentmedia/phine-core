@@ -51,6 +51,7 @@ class JsonModule extends ModuleBase
      */
     protected final function GatherOutput()
     {
+        \header('Content-Type: application/json');
         try
         {
             $this->output = json_encode($this->result);

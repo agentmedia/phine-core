@@ -5,8 +5,8 @@ use Phine\Bundles\Core\Logic\Util\ClassFinder;
 use Phine\Bundles\Core\Logic\Module\BackendModule;
 use Phine\Bundles\Core\Logic\Util\PathUtil;
 use Phine\Framework\System\IO\File;
-use Phine\Database\Core\InstalledBundle;
-use Phine\Database\Core\Site;
+use App\Phine\Database\Core\InstalledBundle;
+use App\Phine\Database\Core\Site;
 
 abstract class BundleManifest
 {

@@ -1,7 +1,7 @@
 <?php
 namespace Phine\Bundles\Core\Logic\Module;
 
-use Phine\Framework\System\String;
+use Phine\Framework\System\Str;
 use Phine\Bundles\Core\Logic\Util\PathUtil;
 use Phine\Bundles\Core\Logic\Util\ClassFinder;
 use Phine\Framework\Localization\PhpTranslator;
@@ -37,9 +37,9 @@ abstract class ModuleBase
     {
         $className = \get_class(new static());
         $endPos = strpos($className, '\\Modules\\');
-        $bundleNS = String::Start($className, $endPos);
+        $bundleNS = Str::Start($className, $endPos);
         $startPos = strrpos($bundleNS, '\\');
-        return String::Part($bundleNS, $startPos + 1);
+        return Str::Part($bundleNS, $startPos + 1);
     }
     
     /**

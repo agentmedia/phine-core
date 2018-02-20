@@ -3,15 +3,15 @@ namespace Phine\Bundles\Core\Modules\Backend;
 use Phine\Bundles\Core\Logic\Module\BackendForm;
 use Phine\Framework\System\Http\Request;
 use Phine\Framework\FormElements\Fields\Input;
-use Phine\Database\Core\Site;
-use Phine\Database\Core\Page;
+use App\Phine\Database\Core\Site;
+use App\Phine\Database\Core\Page;
 use Phine\Framework\Validation\DatabaseCount;
 use Phine\Framework\System\Http\Response;
 use Phine\Bundles\Core\Logic\Routing\BackendRouter;
 use Phine\Bundles\Core\Logic\Tree\TreeBuilder;
 use Phine\Bundles\Core\Logic\Tree\PageTreeProvider;
-use Phine\Database\Access;
-use Phine\Database\Core\Layout;
+use App\Phine\Database\Access;
+use App\Phine\Database\Core\Layout;
 use Phine\Framework\FormElements\Fields\Select;
 use Phine\Framework\System\IO\Path;
 use Phine\Framework\System\IO\File;
@@ -20,13 +20,13 @@ use Phine\Framework\Webserver\Apache\Htaccess\Writer;
 use Phine\Bundles\Core\Logic\DBEnums\MenuAccess;
 use Phine\Bundles\Core\Logic\Access\Backend\GroupFinder;
 use Phine\Bundles\Core\Logic\Access\Backend\RightsFinder;
-use Phine\Database\Core\Usergroup;
+use App\Phine\Database\Core\Usergroup;
 use Phine\Bundles\Core\Snippets\BackendRights\PageRights;
 use Phine\Bundles\Core\Logic\Util\DBSelectUtil;
 use Phine\Bundles\Core\Logic\Access\Backend\Enums\BackendAction;
-use Phine\Database\Core\PageMembergroup;
+use App\Phine\Database\Core\PageMembergroup;
 use Phine\Bundles\Core\Logic\Util\MembergroupUtil;
-use Phine\Database\Core\Membergroup;
+use App\Phine\Database\Core\Membergroup;
 use Phine\Framework\FormElements\Fields\Checkbox;
 use Phine\Framework\System\Date;
 use Phine\Framework\Sitemap\Enums\ChangeFrequency;
@@ -35,6 +35,9 @@ use Phine\Bundles\Core\Logic\Logging\Enums\Action;
 use Phine\Bundles\Core\Snippets\FormParts\PageUrlSelector;
 use Phine\Bundles\Core\Logic\DBEnums\PageType;
 use Phine\Bundles\Core\Logic\Routing\FrontendRouter;
+use App\Phine\Database\Core\Area;
+use App\Phine\Database\Core\PageContent;
+
 /**
  * The page form
  */
@@ -469,13 +472,16 @@ class PageForm extends BackendForm
      */
     protected function OnSuccess()
     {
+        $prevLayout = $this->page->GetLayout();
+        
         $this->page->SetName($this->Value('Name'));
         $this->page->SetUrl($this->Value('Url'));
         $this->page->SetSite($this->site);
         $this->page->SetTitle($this->Value('Title'));
         $this->page->SetDescription($this->Value('Description'));
         $this->page->SetKeywords($this->Value('Keywords'));
-        $this->page->SetLayout(new Layout($this->Value('Layout')));
+        $newLayout = new Layout($this->Value('Layout'));
+        $this->page->SetLayout($newLayout);
         $this->page->SetMenuAccess($this->Value('MenuAccess'));
         $this->page->SetGuestsOnly((bool)$this->Value('GuestsOnly'));
         $this->page->SetPublish((bool)$this->Value('Publish'));
@@ -493,6 +499,7 @@ class PageForm extends BackendForm
         }
         else
         {
+            $this->ReassignContents($prevLayout, $newLayout);
             $this->page->Save();
         }
         $logger = new Logger(self::Guard()->GetUser());
@@ -505,6 +512,58 @@ class PageForm extends BackendForm
         $this->AdjustHtaccess();
         Response::Redirect($this->BackLink());
     }
+    
+    /**
+     * Reassigns contents by area names if layout was changed
+     * @param Layout $prevLayout The old layout
+     * @param Layout $newLayout The new layout
+     */
+    private function ReassignContents(Layout $prevLayout, Layout $newLayout)
+    {
+        if ($prevLayout->Equals($newLayout)) {
+            return;
+        }
+        $oldAreas = Area::Schema()->FetchByLayout(false, $prevLayout);
+        
+        foreach ($oldAreas as $oldArea)
+        {
+            $newArea = $this->FindNewArea($oldArea, $newLayout);
+            if ($newArea) {
+                $this->TransferArea($oldArea, $newArea);
+            }
+            else{
+                $this->ClearArea($oldArea);
+            }
+        }
+     }
+     
+     private function TransferArea(Area $oldArea, Area $newArea) {
+         $sql = Access::SqlBuilder();
+         $tblPageContent = PageContent::Schema()->Table();
+         $setList = $sql->SetList('Area', $sql->Value($newArea->GetID()));
+         
+         $condition = $sql->Equals($tblPageContent->Field('Area'), $sql->Value($oldArea->GetID()))
+                 ->And_($sql->Equals($tblPageContent->Field('Page'), $sql->Value($this->page->GetID())));
+         
+         $update = $sql->Update(PageContent::Schema()->Table(), $setList, $condition);
+         Access::Connection()->ExecuteQuery($update);
+     }
+     
+     private function ClearArea(Area $oldArea) {
+         $sql = Access::SqlBuilder();
+         $tblPageContent = PageContent::Schema()->Table();
+         $condition = $sql->Equals($tblPageContent->Field('Area'), $sql->Value($oldArea->GetID()))
+                 ->And_($sql->Equals($tblPageContent->Field('Page'), $sql->Value($this->page->GetID())));
+         PageContent::Schema()->Delete($condition);
+     }
+     
+     private function FindNewArea(Area $oldArea, Layout $newLayout) {
+         $sql = Access::SqlBuilder();
+         $tblArea = Area::Schema()->Table();
+         $where = $sql->Equals($tblArea->Field('Layout'), $sql->Value($newLayout->GetID()))
+            ->And_($sql->Equals($tblArea->Field('Name'), $sql->Value($oldArea->GetName())));
+         return Area::Schema()->First($where);
+     }
     
     private function SaveType()
     {
@@ -650,7 +709,7 @@ class PageForm extends BackendForm
         $file = Path::Combine(PHINE_PATH, 'Public/.htaccess');
         if (!File::Exists($file))
         {
-            return;
+            throw new \Exception('HTACCESS FILE $file NOT FOUND');
         }
         $writer = new Writer();
         $rewriter = new Rewriter($writer);
@@ -674,7 +733,7 @@ class PageForm extends BackendForm
         }
         if ($startPos === false || $endPos === false)
         {
-            return;
+            throw new \Exception("HTACCESS COMMANDS NOT FOUND");
         }
         $rewriter->AddPageCommands($this->page);
         $newText = substr($text, 0, $startPos) . $writer->ToString() . substr($text, $endPos);

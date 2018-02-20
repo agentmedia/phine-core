@@ -7,7 +7,7 @@ use Phine\Framework\Database\ObjectGeneration\CamelCaseTableNameMapper;
 use Phine\Framework\Database\ObjectGeneration\TableObjectGenerator;
 use Phine\Bundles\Core\Logic\Bundle\BundleDependency;
 use Phine\Framework\Database\Sql;
-use Phine\Database\Core\InstalledBundle;
+use App\Phine\Database\Core\InstalledBundle;
 use Phine\Framework\System\Date;
 use Phine\Framework\Progress\Json\Reporter;
 use Phine\Framework\Wording\Worder;
@@ -155,7 +155,7 @@ class Installer
         $tablePrefix = 'pc_';
       
         
-        $mapper = new CamelCaseTableNameMapper('Phine\Database', $this->FetchDBNamespaces($tablePrefix));
+        $mapper = new CamelCaseTableNameMapper('App\Phine\Database', $this->FetchDBNamespaces($tablePrefix));
         $generator = new TableObjectGenerator($this->connection, PathUtil::DatabaseFolder(), $mapper);
         $generator->AddReporter(new Reporter($this->statusFile, array(), 'Phine.Installer.StatusDescription.Table_{0}.Total_{1}'));
         $generator->Generate();

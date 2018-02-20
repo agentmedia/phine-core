@@ -1,9 +1,9 @@
 <?php
 
 namespace Phine\Bundles\Core\Logic\Tree;
-use Phine\Database\Core\Area;
-use Phine\Database\Core\Layout;
-use Phine\Database\Access;
+use App\Phine\Database\Core\Area;
+use App\Phine\Database\Core\Layout;
+use App\Phine\Database\Access;
 
 class AreaListProvider extends TableObjectTreeProvider
 {

@@ -60,3 +60,6 @@ Added page types for redirects and 404 Pages
 
 == 1.2.2 ==
 Added unique key on site names
+
+== 1.2.3 ==
+Added member change requests (e-mails and passwords)

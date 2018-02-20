@@ -6,7 +6,7 @@ use Phine\Framework\FormElements\Fields\Input;
 use Phine\Framework\Validation\DatabaseCount;
 use Phine\Framework\System\Http\Response;
 use Phine\Bundles\Core\Logic\Routing\BackendRouter;
-use Phine\Database\Core\Membergroup;
+use App\Phine\Database\Core\Membergroup;
 
 /**
  * The member group form

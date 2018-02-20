@@ -4,28 +4,21 @@ use Phine\Framework\System\IO\Path;
 use Phine\Bundles\Core\Logic\Module\ModuleBase;
 use Phine\Bundles\Core\Logic\Module\TemplateModule;
 
-use Phine\Framework\System\String;
-use Phine\Database\Core\Layout;
+use Phine\Framework\System\Str;
+use App\Phine\Database\Core\Layout;
 use Phine\Framework\System\IO\Folder;
 use Phine\Bundles\Core\Logic\Module\Enums\ModuleLocation;
 use Phine\Framework\System\Http\Request;
 use Phine\Bundles\Core\Logic\Module\FrontendModule;
-use Phine\Database\Core\Site;
+use App\Phine\Database\Core\Site;
+use Phine\Framework\System\IO\File;
+
 
 /**
  * Helper class for calculation of required cms paths
  */
 class PathUtil
 {
-    /*
-    static function BundleTranslationsFile($bundleName, $lang)
-    {
-        $bundle =  Path::Combine(PHINE_PATH, 'Bundles/' . $bundleName);
-        returmm  
-        
-    }*/
-    
-    
     /**
      * Gets the folder for the bundle
      * @param string $bundleName The name of the bundle
@@ -33,7 +26,11 @@ class PathUtil
      */
     static function BundleFolder($bundleName)
     {
-        return Path::Combine(self::BundlesFolder(), $bundleName);
+        $packageBundles = self::PackageBundles();
+        if (isset($packageBundles[$bundleName])) {
+            return $packageBundles[$bundleName];
+        }
+        return Path::Combine(self::AppBundlesFolder(), $bundleName);
     }
     
     static function InstallationFolder($bundleName)
@@ -56,9 +53,9 @@ class PathUtil
      * Gets the bundles folder
      * @return string Returns the root folder of all bundles
      */
-    static function BundlesFolder()
+    static function AppBundlesFolder()
     {
-        return Path::Combine(PHINE_PATH, 'Bundles');
+        return Path::Combine(PHINE_PATH, 'App/Phine/Bundles');
     }
     
     /**
@@ -67,8 +64,31 @@ class PathUtil
      */
     static function Bundles()
     {
-       return Folder::GetSubFolders(self::BundlesFolder());
+       return array_merge(array_keys(self::PackageBundles()), Folder::GetSubFolders(self::AppBundlesFolder()));
     }
+    
+    /**
+     *
+     * @var array
+     */
+    private static $packageBundles  = null;
+    public static function PackageBundles() {
+        if (self::$packageBundles !== null) {
+            return self::$packageBundles;
+        }
+        self::$packageBundles = array();
+        $cacheFile = self::PackageBundleCacheFile();
+        if (File::Exists($cacheFile)) {
+            self::$packageBundles = json_decode(File::GetContents($cacheFile), true);
+        }
+        return self::$packageBundles;
+    }
+    
+    static function PackageBundleCacheFile()
+    {
+        return Path::Combine(PHINE_PATH, 'App/Phine/Cache/Bundles/packages.json');
+    }
+    
     
     
     /**
@@ -171,8 +191,8 @@ class PathUtil
     static function ModuleTranslationsFolder(ModuleBase $module)
     {
         $class = new \ReflectionClass($module);
-        $classFile = String::Replace('\\', '/', $class->getFileName());
-        return String::Replace('/Modules/', '/Translations/', Path::RemoveExtension($classFile));
+        $classFile = Str::Replace('\\', '/', $class->getFileName());
+        return Str::Replace('/Modules/', '/Translations/', Path::RemoveExtension($classFile));
     }
     
     /**
@@ -196,7 +216,7 @@ class PathUtil
      */
     static function ModuleCustomTemplatesFolder(TemplateModule $module)
     {
-        $parentFolder = Path::Combine(PHINE_PATH, 'ModuleTemplates');
+        $parentFolder = Path::Combine(PHINE_PATH, 'App/Phine/ModuleTemplates');
         $bundleFolder = Path::Combine($parentFolder, $module->MyBundle());
         return Path::Combine($bundleFolder, $module->MyName());
     }
@@ -208,7 +228,7 @@ class PathUtil
      */
     static function LayoutTemplate(Layout $layout)
     {
-        $folder = Path::Combine(PHINE_PATH, 'LayoutTemplates');
+        $folder = Path::Combine(PHINE_PATH, 'App/Phine/LayoutTemplates');
         $file = Path::Combine($folder, $layout->GetName());
         return Path::AddExtension($file, 'phtml');
     }
@@ -276,11 +296,11 @@ class PathUtil
      */
     static function FilesUrl()
     {
-        return Path::Combine(Path::Directory(self::BackendUrl()), 'files');
+        return Path::Combine(Path::Directory(self::BackendUrl()), '../files');
     }
     /**
-     * Gets the url to the backend upload folder
-     * @return type
+     * Gets the url to the upload folder; CAUTION: This only works in backend pages!!!
+     * @return string
      */
     static function UploadUrl()
     {
@@ -288,17 +308,17 @@ class PathUtil
     }
     
     /**
-     * Gets the server path to the backend upload folder
+     * Gets the server path to the files folder
      * @return string
      */
     static function FilesPath()
     {
-        return Path::Combine(Path::Directory(self::BackendPath()), 'files');
+        return Path::Combine(PHINE_PATH, 'Public/files');
     }
     
     
     /**
-     * Gets the server path to the backend upload folder
+     * Gets the server path to the upload folder
      * @return string
      */
     static function UploadPath()
@@ -313,7 +333,7 @@ class PathUtil
      */
     static function SitemapCacheFile(Site $site)
     {
-        $cacheFolder = Path::Combine(PHINE_PATH, 'Cache/Sitemap');
+        $cacheFolder = Path::Combine(PHINE_PATH, 'App/Phine/Cache/Sitemap');
         $filename = Path::AddExtension($site->GetID(), 'xml');
         return Path::Combine($cacheFolder, $filename);
     }
@@ -335,7 +355,7 @@ class PathUtil
             }
             $file .= '-' . $cacheKey;
         }
-        $cacheFolder = Path::Combine(PHINE_PATH, 'Cache/Content');
+        $cacheFolder = Path::Combine(PHINE_PATH, 'App/Phine/Cache/Content');
         return Path::AddExtension(Path::Combine($cacheFolder, $file), 'phtml');
     }
     
@@ -345,7 +365,7 @@ class PathUtil
      */
     static function DatabaseFolder()
     {
-        return Path::Combine(PHINE_PATH, 'Database');
+        return Path::Combine(PHINE_PATH, 'App/Phine/Database');
     }
 }
 

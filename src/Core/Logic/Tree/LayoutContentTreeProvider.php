@@ -1,10 +1,10 @@
 <?php
 
 namespace Phine\Bundles\Core\Logic\Tree;
-use Phine\Database\Core\LayoutContent;
-use Phine\Database\Core\Content;
-use Phine\Database\Access;
-use Phine\Database\Core\Area;
+use App\Phine\Database\Core\LayoutContent;
+use App\Phine\Database\Core\Content;
+use App\Phine\Database\Access;
+use App\Phine\Database\Core\Area;
 
 class LayoutContentTreeProvider extends TableObjectTreeProvider implements IContentTreeProvider
 {

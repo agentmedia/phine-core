@@ -1,11 +1,14 @@
 <?php
 namespace Phine\Bundles\Core\Logic\InsertVariables;
-use Phine\Database\Core\Page;
+use App\Phine\Database\Core\Page;
 use Phine\Framework\System\Http\Request;
 
 use Phine\Bundles\Core\Logic\Rendering\PageRenderer;
 use Phine\Bundles\Core\Logic\Routing\FrontendRouter;
-use Phine\Database\Access;
+use Phine\Bundles\Core\Logic\Util\PathUtil;
+use Phine\Framework\System\IO\File;
+use Phine\Framework\System\Date;
+use Phine\Framework\System\IO\Path;
 
 class Replacer
 {
@@ -50,9 +53,58 @@ class Replacer
         {
             case 'page':
                 $this->ReplacePageToken($token, $startPos, $endPos);
-                return;
+                break;
+            
+            case 'file':
+                $this->ReplaceFileToken($token, $startPos, $endPos);
+                break;
         }
     }
+    
+    private function ReplaceFileToken(Token $token, $startPos, &$endPos)
+    {
+        
+        $path = $token->TypeParam('path');
+        if (!$path){
+            return;
+        }
+        $serverPath = Path::Combine(PathUtil::FilesPath(), $path);
+        if (!File::Exists($serverPath)){
+            
+            throw new \Exception(Trans('Core.Replacer.Error.FileNotFound.Path_{0}', $path));
+        }
+        if (!File::IsReadable($serverPath)){
+            throw new \Exception(Trans('Core.Replacer.Error.FileNotReadable.Path_{0}', $path));
+        }
+       
+        switch($token->Property) {
+            case 'lastmodurl':
+                $this->ReplaceFileLastModUrl($serverPath, $token, $startPos, $endPos);
+                break;
+            
+            case 'nocacheurl':
+                $this->ReplaceFileNoCacheUrl($token, $startPos, $endPos);
+                break;
+        }
+    }
+    
+    private function ReplaceFileLastModUrl($serverPath, Token $token, $startPos, &$endPos)
+    {
+        $url = Path::Combine('files', $token->TypeParam('path'));
+        $lastMod = File::GetLastModified($serverPath)->TimeStamp();
+        $this->InsertValue($url . '?ts=' . $lastMod, $token, $startPos, $endPos);
+    }
+    
+    private function ReplaceFileNoCacheUrl(Token $token, $startPos, &$endPos)
+    {
+        $url = Path::Combine('files', $token->TypeParam('path'));
+        $tsNow = Date::Now()->TimeStamp();
+        $this->InsertValue($url . '?ts=' . $tsNow, $token, $startPos, $endPos);
+    }
+    
+    
+    
+    
     
     private function ReplacePageToken(Token $token, $startPos, &$endPos)
     {

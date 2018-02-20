@@ -5,7 +5,7 @@ namespace Phine\Bundles\Core\Logic\Installation;
 use Phine\Framework\System\IO\Path;
 use Phine\Framework\System\IO\Folder;
 use Phine\Framework\System\IO\File;
-use Phine\Framework\System\String;
+use Phine\Framework\System\Str;
 use Phine\Bundles\Core\Logic\Bundle\BundleManifest;
 use Phine\Framework\Database\Interfaces\IDatabaseConnection;
 use Phine\Bundles\Core\Logic\Util\PathUtil;
@@ -105,7 +105,7 @@ class BundleInstaller
         $tables = $this->connection->GetTables();
         foreach ($tables as $table)
         {
-            if (String::StartsWith('pc_' . String::ToLower($this->manifest->BundleName()  . '_'), $table))
+            if (Str::StartsWith('pc_' . Str::ToLower($this->manifest->BundleName()  . '_'), $table))
             {
                 $this->CleanForeignKeys($table);
             }

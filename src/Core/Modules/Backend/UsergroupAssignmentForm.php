@@ -1,16 +1,16 @@
 <?php
 namespace Phine\Bundles\Core\Modules\Backend;
-use Phine\Database\Access;
-use Phine\Database\Core\Usergroup;
-use Phine\Database\Core\User;
-use Phine\Database\Core\UserUsergroup;
+use App\Phine\Database\Access;
+use App\Phine\Database\Core\Usergroup;
+use App\Phine\Database\Core\User;
+use App\Phine\Database\Core\UserUsergroup;
 use Phine\Bundles\Core\Logic\Module\BackendForm;
 use Phine\Framework\System\Http\Request;
 use Phine\Framework\System\Http\Response;
 use Phine\Bundles\Core\Logic\Routing\BackendRouter;
 use Phine\Framework\FormElements\Fields\Checkbox;
 use Phine\Bundles\Core\Snippets\FormParts\FieldColumnizer;
-use Phine\Framework\System\String;
+use Phine\Framework\System\Str;
 use Phine\Bundles\Core\Logic\Access\Backend\Enums\BackendAction;
 
 class UsergroupAssignmentForm extends BackendForm
@@ -136,7 +136,7 @@ class UsergroupAssignmentForm extends BackendForm
         $post = Request::PostArray();
         foreach ($post as $name => $value)
         {
-            if (!String::StartsWith('Usergroup_', $name))
+            if (!Str::StartsWith('Usergroup_', $name))
             {
                 continue;
             }

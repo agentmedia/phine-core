@@ -1,9 +1,10 @@
 <?php $field = $this->field; ?>
 <?php $name = $field->GetName() ?>
+<?php $classes = join(' ', $field->GetCssClasses()) ?>
 <?php if ($this->field->GetLabel()): ?>
 <label for ="<?php echo $name?>"<?php if($field->CheckFailed()): ?> class="error"<?php endif; ?>><?php HtmlOut($field->GetLabel()) ?></label>
 <?php endif; ?>
-<input <?php foreach($this->attribs as $attrName=>$attrValue): ?> <?php echo $attrName ?>="<?php HtmlOut($attrValue)?>"<?php endforeach; ?> type="<?php HtmlOut($field->GetType()) ?>" name="<?php echo $name?>"<?php if($field->CheckFailed()): ?> class="error"<?php endif; ?> id="<?php echo $name?>" value="<?php HtmlOut($field->GetValue())?>" />
+<input <?php if($classes): ?>class="<?php echo $classes ?>"<?php endif; ?><?php foreach($this->attribs as $attrName=>$attrValue): ?> <?php echo $attrName ?>="<?php HtmlOut($attrValue)?>"<?php endforeach; ?> type="<?php HtmlOut($field->GetType()) ?>" name="<?php echo $name?>"<?php if($field->CheckFailed()): ?> class="error"<?php endif; ?> id="<?php echo $name?>" value="<?php HtmlOut($field->GetValue())?>" />
 <?php if ($field->CheckFailed()): ?>
 <small class="error">
     <?php foreach ($field->GetValidators() as $validator): ?>

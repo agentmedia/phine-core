@@ -1,16 +1,16 @@
 <?php
 
 namespace Phine\Bundles\Core\Logic\Util;
-use Phine\Database\Core\Member;
-use Phine\Database\Core\Membergroup;
-use Phine\Database\Core\MemberMembergroup;
-use Phine\Database\Core\PageMembergroup;
-use Phine\Database\Core\Page;
-use Phine\Database\Core\ContentMembergroup;
-use Phine\Database\Core\Content;
+use App\Phine\Database\Core\Member;
+use App\Phine\Database\Core\Membergroup;
+use App\Phine\Database\Core\MemberMembergroup;
+use App\Phine\Database\Core\PageMembergroup;
+use App\Phine\Database\Core\Page;
+use App\Phine\Database\Core\ContentMembergroup;
+use App\Phine\Database\Core\Content;
 use Phine\Framework\FormElements\Fields\CheckList;
 use Phine\Framework\Database\Sql\JoinType;
-use Phine\Database\Access;
+use App\Phine\Database\Access;
 
 /**
  * Provides methods to retrieve member group infos and form fields

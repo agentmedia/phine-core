@@ -1,10 +1,10 @@
 <?php
 
 namespace Phine\Bundles\Core\Logic\Rendering;
-use Phine\Database\Core\Page;
-use Phine\Database\Core\Layout;
-use Phine\Database\Core\Area;
-use Phine\Database\Access;
+use App\Phine\Database\Core\Page;
+use App\Phine\Database\Core\Layout;
+use App\Phine\Database\Core\Area;
+use App\Phine\Database\Access;
 use Phine\Bundles\Core\Logic\Util\PathUtil;
 use Phine\Bundles\Core\Logic\InsertVariables\Replacer;
 use Phine\Bundles\Core\Logic\DBEnums\PageType;

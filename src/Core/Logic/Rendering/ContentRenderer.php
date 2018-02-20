@@ -3,7 +3,7 @@
 namespace Phine\Bundles\Core\Logic\Rendering;
 use Phine\Bundles\Core\Logic\Tree\IContentTreeProvider;
 use Phine\Bundles\Core\Logic\Util\ClassFinder;
-use Phine\Database\Core\Content;
+use App\Phine\Database\Core\Content;
 use Phine\Bundles\Core\Logic\Access\Frontend\MemberGuard;
 use Phine\Framework\Access\Base\Action;
 use Phine\Bundles\Core\Logic\Translation\ContentTranslator;

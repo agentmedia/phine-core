@@ -8,10 +8,10 @@ use Phine\Framework\System\Http\Request;
 use Phine\Framework\System\Http\Response;
 use Phine\Bundles\Core\Logic\Routing\BackendRouter;
 use Phine\Bundles\Core\Logic\Module\ContentForm;
-use Phine\Database\Core\Container;
+use App\Phine\Database\Core\Container;
 use Phine\Bundles\Core\Logic\Access\Backend\Enums\BackendAction;
 /**
- * The frontend the module selection form
+ * The module selection form
  */
 class ModuleForm extends ContentForm
 {

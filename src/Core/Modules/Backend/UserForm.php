@@ -6,7 +6,7 @@ use Phine\Framework\System\Http\Response;
 use Phine\Framework\FormElements\Fields\Input;
 use Phine\Framework\Validation\DatabaseCount;
 
-use Phine\Database\Core\User;
+use App\Phine\Database\Core\User;
 use Phine\Bundles\Core\Logic\Module\BackendForm;
 use Phine\Bundles\Core\Logic\Routing\BackendRouter;
 use Phine\Framework\FormElements\Fields\Select;
@@ -15,11 +15,11 @@ use Phine\Framework\Validation\CompareCheck;
 use Phine\Bundles\Core\Logic\Access\Backend\Enums\BackendAction;
 use Phine\Framework\Validation\PhpFilter;
 use Phine\Framework\Validation\StringLength;
-use Phine\Framework\System\String;
+use Phine\Framework\System\Str;
 use Phine\Bundles\Core\Logic\Util\DBSelectUtil;
-use Phine\Database\Core\Language;
+use App\Phine\Database\Core\Language;
 use Phine\Bundles\Core\Snippets\FormParts\FieldColumnizer;
-use Phine\Database\Access;
+use App\Phine\Database\Access;
 use Phine\Bundles\Core\Logic\Logging\Logger;
 use Phine\Bundles\Core\Logic\Logging\Enums\Action;
 
@@ -176,7 +176,7 @@ class UserForm extends BackendForm
         $password = $this->Value('Password');
         if ($password)
         {
-            $salt = String::Start(md5(uniqid(microtime())), 8);
+            $salt = Str::Start(md5(uniqid(microtime())), 8);
             $pwHash = hash('sha256', $password . $salt);
             $this->user->SetPassword($pwHash);
             $this->user->SetPasswordSalt($salt);

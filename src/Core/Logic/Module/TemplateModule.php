@@ -2,7 +2,7 @@
 namespace Phine\Bundles\Core\Logic\Module;
 
 use Phine\Framework\System\IO\Path;
-use Phine\Framework\System\String;
+use Phine\Framework\System\Str;
 /*
  * Represents a module rendered by template
  */
@@ -30,8 +30,8 @@ abstract class TemplateModule extends ModuleBase
     protected final function BuiltInTemplateFile()
     {
         $class = new \ReflectionClass($this);
-        $classFile = String::Replace('\\', '/', $class->getFileName());
-        $templatePath = String::Replace('/Modules/', '/Templates/', $classFile);
+        $classFile = Str::Replace('\\', '/', $class->getFileName());
+        $templatePath = Str::Replace('/Modules/', '/Templates/', $classFile);
         return Path::AddExtension($templatePath, 'phtml', true);
     }
     

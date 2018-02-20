@@ -3,7 +3,7 @@
 namespace Phine\Bundles\Core\Modules\Backend;
 
 
-use Phine\Database\Core\Settings;
+use App\Phine\Database\Core\Settings;
 use Phine\Bundles\Core\Logic\Config\SettingsProxy;
 use Phine\Bundles\Core\Logic\Config\Enums\SmtpSecurity;
 use Phine\Bundles\Core\Logic\Module\BackendForm;
@@ -26,7 +26,7 @@ class SettingsForm extends BackendForm
     {
         $this->settings = SettingsProxy::Singleton()->Settings();
         $this->AddLogLifetimeField();
-        
+        $this->AddChangeRequestLifetimeField();
         $this->AddMailFromEMailField();
         $this->AddMailFromNameField();
         $this->AddSmtpHostField();
@@ -47,6 +47,18 @@ class SettingsForm extends BackendForm
         $field = Input::Text($name, $this->settings->GetLogLifetime());
         $this->AddField($field);
         $this->AddValidator($name, new Integer(0, 730));
+        $this->SetRequired($name);
+    }
+    
+    /**
+     * Adds the change request lifetime field
+     */
+    private function AddChangeRequestLifetimeField()
+    {
+        $name = 'ChangeRequestLifetime';
+        $field = Input::Text($name, $this->settings->GetChangeRequestLifetime());
+        $this->AddField($field);
+        $this->AddValidator($name, new Integer(1, 360));
         $this->SetRequired($name);
     }
     
@@ -133,6 +145,7 @@ class SettingsForm extends BackendForm
     protected function OnSuccess()
     {
         $this->settings->SetLogLifetime((int)$this->Value('LogLifetime'));
+        $this->settings->SetChangeRequestLifetime($this->Value('ChangeRequestLifetime'));
         $this->settings->SetMailFromEMail($this->Value('MailFromEMail'));
         $this->settings->SetMailFromName($this->Value('MailFromName'));
         $this->settings->SetSmtpHost($this->Value('SmtpHost'));
@@ -140,6 +153,7 @@ class SettingsForm extends BackendForm
         $this->settings->SetSmtpUser($this->Value('SmtpUser'));
         $this->settings->SetSmtpPassword($this->Value('SmtpPassword'));
         $this->settings->SetSmtpSecurity($this->Value('SmtpSecurity'));
+        $this->settings->Save();
         Response::Redirect($this->BackLink());
     }
     

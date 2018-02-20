@@ -1,6 +1,6 @@
 <?php
 namespace Phine\Bundles\Core\Logic\Util;
-use Phine\Framework\System\String;
+use Phine\Framework\System\Str;
 
 /**
  * Utility class to serialize/deserialize array in text areas
@@ -36,7 +36,7 @@ class ArrayLinesSerializer
     function LinesToArray($text)
     {
         $result = array();
-        $lines = String::SplitLines($text);
+        $lines = Str::SplitLines($text);
         foreach ($lines as $line)
         {
             $line = trim($line);

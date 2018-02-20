@@ -2,7 +2,7 @@
 namespace Phine\Bundles\Core\Logic\Snippet;
 
 use Phine\Framework\System\IO\Path;
-use Phine\Framework\System\String;
+use Phine\Framework\System\Str;
 /*
  * Represents a snippet rendered by template
  */
@@ -15,8 +15,8 @@ abstract class TemplateSnippet
     protected function TemplateFile()
     {
         $class = new \ReflectionClass($this);
-        $classFile = String::Replace('\\', '/', $class->getFileName());
-        $templatePath = String::Replace('/Snippets/', '/Templates/Snippets/', $classFile);
+        $classFile = Str::Replace('\\', '/', $class->getFileName());
+        $templatePath = Str::Replace('/Snippets/', '/Templates/Snippets/', $classFile);
         return Path::AddExtension($templatePath, 'phtml', true);
     }
     

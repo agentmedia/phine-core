@@ -2,29 +2,29 @@
 
 namespace Phine\Bundles\Core\Logic\Access\Backend;
 
-use Phine\Database\Access;
+use App\Phine\Database\Access;
 use Phine\Framework\Access\Base\Guard;
 use Phine\Framework\Access\Base\Action;
 use Phine\Bundles\Core\Logic\Module\ModuleBase;
-use Phine\Database\Core\User;
-use Phine\Database\Core\Usergroup;
-use Phine\Database\Core\UserUsergroup;
+use App\Phine\Database\Core\User;
+use App\Phine\Database\Core\Usergroup;
+use App\Phine\Database\Core\UserUsergroup;
 use Phine\Framework\Access\Base\GrantResult;
-use Phine\Database\Core\Site;
+use App\Phine\Database\Core\Site;
 use Phine\Framework\Database\Sql\InList;
 use Phine\Bundles\Core\Logic\Access\Backend\Enums\BackendAction;
-use Phine\Database\Core\Page;
-use Phine\Database\Core\Container;
-use Phine\Database\Core\Layout;
-use Phine\Database\Core\Content;
-use Phine\Database\Core\Area;
+use App\Phine\Database\Core\Page;
+use App\Phine\Database\Core\Container;
+use App\Phine\Database\Core\Layout;
+use App\Phine\Database\Core\Content;
+use App\Phine\Database\Core\Area;
 
-use Phine\Database\Core\BackendPageRights;
-use Phine\Database\Core\BackendSiteRights;
-use Phine\Database\Core\BackendContentRights;
-use Phine\Database\Core\BackendLayoutRights;
-use Phine\Database\Core\BackendContainerRights;
-use Phine\Database\Core\ModuleLock;
+use App\Phine\Database\Core\BackendPageRights;
+use App\Phine\Database\Core\BackendSiteRights;
+use App\Phine\Database\Core\BackendContentRights;
+use App\Phine\Database\Core\BackendLayoutRights;
+use App\Phine\Database\Core\BackendContainerRights;
+use App\Phine\Database\Core\ModuleLock;
 
 /**
  * Guard for control access  

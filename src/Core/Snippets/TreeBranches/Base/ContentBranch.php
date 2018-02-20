@@ -10,7 +10,7 @@ use Phine\Bundles\Core\Modules\Backend\ModuleForm;
 use Phine\Bundles\Core\Logic\Module\BackendModule;
 use Phine\Bundles\Core\Logic\Access\Backend\Enums\BackendAction;
 use Phine\Framework\Access\Base\GrantResult;
-use Phine\Database\Core\Content;
+use App\Phine\Database\Core\Content;
 use Phine\Framework\Database\Objects\TableObject;
 
 /**

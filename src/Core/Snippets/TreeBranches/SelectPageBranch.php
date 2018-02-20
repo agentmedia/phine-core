@@ -2,7 +2,7 @@
 namespace Phine\Bundles\Core\Snippets\TreeBranches;
 
 use Phine\Bundles\Core\Logic\Snippet\TemplateSnippet;
-use Phine\Database\Core\Page;
+use App\Phine\Database\Core\Page;
 use Phine\Bundles\Core\Logic\Tree\PageTreeProvider;
 
 class SelectPageBranch extends TemplateSnippet

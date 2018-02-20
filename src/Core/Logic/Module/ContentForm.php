@@ -10,17 +10,17 @@ use Phine\Framework\FormElements\Fields\Input;
 use Phine\Framework\FormElements\Fields\Select;
 use Phine\Framework\System\IO\Folder;
 use Phine\Framework\System\IO\Path;
-use Phine\Database\Core\Content;
+use App\Phine\Database\Core\Content;
 use Phine\Bundles\Core\Logic\Tree\LayoutContentTreeProvider;
 use Phine\Bundles\Core\Logic\Tree\PageContentTreeProvider;
 use Phine\Bundles\Core\Logic\Tree\ContainerContentTreeProvider;
-use Phine\Database\Core\LayoutContent;
-use Phine\Database\Core\PageContent;
-use Phine\Database\Core\ContainerContent;
+use App\Phine\Database\Core\LayoutContent;
+use App\Phine\Database\Core\PageContent;
+use App\Phine\Database\Core\ContainerContent;
 use Phine\Bundles\Core\Logic\Tree\TreeBuilder;
-use Phine\Database\Core\Page;
-use Phine\Database\Core\Area;
-use Phine\Database\Core\Container;
+use App\Phine\Database\Core\Page;
+use App\Phine\Database\Core\Area;
+use App\Phine\Database\Core\Container;
 use Phine\Bundles\Core\Logic\Routing\BackendRouter;
 use Phine\Bundles\Core\Modules\Backend\Overview;
 use Phine\Bundles\Core\Modules\Backend\PageContentTree;
@@ -31,24 +31,20 @@ use Phine\Bundles\Core\Logic\Util\PathUtil;
 use Phine\Bundles\Core\Logic\Tree\ContentTreeUtil;
 use Phine\Bundles\Core\Logic\Access\Backend\RightsFinder;
 use Phine\Bundles\Core\Logic\Access\Backend\GroupFinder;
-use Phine\Database\Core\Usergroup;
-use Phine\Database\Core\BackendContentRights;
+use App\Phine\Database\Core\Usergroup;
+use App\Phine\Database\Core\BackendContentRights;
 use Phine\Bundles\Core\Snippets\BackendRights\ContentRights;
 use Phine\Bundles\Core\Logic\Util\DBSelectUtil;
-use Phine\Bundles\Core\Logic\Access\Backend\UserGuard;
 use Phine\Bundles\Core\Logic\Access\Backend\Enums\BackendAction;
-use Phine\Bundles\Core\Modules\Backend\ContainerList;
-use Phine\Bundles\Core\Modules\Backend\LayoutList;
-use Phine\Bundles\Core\Modules\Backend\PageTree;
-use Phine\Database\Core\ContentWording;
+use App\Phine\Database\Core\ContentWording;
 use Phine\Framework\Validation\Integer;
-use Phine\Database\Core\Membergroup;
-use Phine\Database\Core\ContentMembergroup;
+use App\Phine\Database\Core\Membergroup;
+use App\Phine\Database\Core\ContentMembergroup;
 use Phine\Bundles\Core\Logic\Util\MembergroupUtil;
-use Phine\Database\Access;
+use App\Phine\Database\Access;
 use Phine\Framework\FormElements\Fields\Checkbox;
 use Phine\Framework\System\Date;
-use Phine\Framework\System\String;
+use Phine\Framework\System\Str;
 use Phine\Bundles\Core\Logic\Logging\Logger;
 use Phine\Bundles\Core\Logic\Logging\Enums\Action;
 
@@ -882,7 +878,7 @@ abstract class ContentForm extends BackendForm
 
     private function WordingFieldName($name)
     {
-        return String::Replace('.', '-', $name);
+        return Str::Replace('.', '-', $name);
     }
 
     private function SaveWordings()

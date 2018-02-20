@@ -2,22 +2,21 @@
 
 namespace Phine\Bundles\Core\Logic\Logging;
 
-use Phine\Database\Core\LogItem;
-use Phine\Database\Core\LogPage;
-use Phine\Database\Core\LogContent;
-use Phine\Database\Core\LogLayout;
-use Phine\Database\Core\LogArea;
-use Phine\Database\Core\LogContainer;
-use Phine\Database\Core\LogTemplate;
-use Phine\Database\Core\PageContent;
-use Phine\Database\Core\ContainerContent;
-use Phine\Database\Core\Container;
-use Phine\Database\Core\LayoutContent;
-use Phine\Database\Core\Content;
-use Phine\Database\Core\Area;
-use Phine\Database\Core\Page;
-use Phine\Database\Core\Layout;
-use Phine\Database\Access;
+use App\Phine\Database\Core\LogItem;
+use App\Phine\Database\Core\LogPage;
+use App\Phine\Database\Core\LogContent;
+use App\Phine\Database\Core\LogLayout;
+use App\Phine\Database\Core\LogArea;
+use App\Phine\Database\Core\LogContainer;
+use App\Phine\Database\Core\PageContent;
+use App\Phine\Database\Core\ContainerContent;
+use App\Phine\Database\Core\Container;
+use App\Phine\Database\Core\LayoutContent;
+use App\Phine\Database\Core\Content;
+use App\Phine\Database\Core\Area;
+use App\Phine\Database\Core\Page;
+use App\Phine\Database\Core\Layout;
+use App\Phine\Database\Access;
 use Phine\Framework\Database\Sql\JoinType;
 
 /**
@@ -249,7 +248,7 @@ class LogEvaluator
      */
     static function LastTemplateLog($moduleType, $template)
     {
-        $tblLogTemplate = \Phine\Database\Core\LogTemplate::Schema()->Table();
+        $tblLogTemplate = \App\Phine\Database\Core\LogTemplate::Schema()->Table();
         $tblLogItem = LogItem::Schema()->Table();
         $sql = Access::SqlBuilder();
         $orderBy = $sql->OrderList($sql->OrderDesc($tblLogItem->Field('Changed')));

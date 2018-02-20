@@ -1,9 +1,9 @@
 <?php
 namespace Phine\Bundles\Core\Logic\Util;
 use Phine\Framework\FormElements\Fields\Select;
-use Phine\Database\Access;
-use Phine\Database\Core\Usergroup;
-use Phine\Database\Core\Language;
+use App\Phine\Database\Access;
+use App\Phine\Database\Core\Usergroup;
+use App\Phine\Database\Core\Language;
 use Phine\Framework\Database\Sql\Condition;
 
 class DBSelectUtil

@@ -3,9 +3,9 @@
 namespace Phine\Bundles\Core\Logic\Translation;
 use Phine\Framework\Localization\Base\FormatTranslator;
 use Phine\Framework\Localization\PhpTranslator;
-use Phine\Database\Core\Content;
-use Phine\Database\Core\ContentWording;
-use Phine\Framework\System\String;
+use App\Phine\Database\Core\Content;
+use App\Phine\Database\Core\ContentWording;
+use Phine\Framework\System\Str;
 
 /**
  * Translator for frontend content labels
@@ -40,7 +40,7 @@ class ContentTranslator extends FormatTranslator
         $wordings = ContentWording::Schema()->FetchByContent(false, $content);
         foreach($wordings as $wording)
         {
-            $prefix = String::Replace('-', '.', $content->GetType());
+            $prefix = Str::Replace('-', '.', $content->GetType());
             $this->texts[$prefix . '.' . $wording->GetPlaceholder()] = $wording->GetText();
         }
     }
@@ -77,6 +77,11 @@ class ContentTranslator extends FormatTranslator
             return $this->texts[$placeholder];
         }
         return $this->phpTranslator->GetReplacement($placeholder);
+    }
+    
+    public function HasReplacement($placeholder)
+    {
+        return isset($this->texts[$placeholder]) || $this->phpTranslator->HasReplacement($placeholder);
     }
 
     /**

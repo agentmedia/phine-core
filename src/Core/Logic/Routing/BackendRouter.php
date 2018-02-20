@@ -2,10 +2,9 @@
 namespace Phine\Bundles\Core\Logic\Routing;
 use Phine\Bundles\Core\Logic\Module\BackendModule;
 use Phine\Bundles\Core\Logic\Module\ModuleBase;
-use Phine\Bundles\Core\Logic\Module\JsonModule;
 use Phine\Framework\System\Http\Request;
 use Phine\Bundles\Core\Logic\Util\ClassFinder;
-use Phine\Database\Core\Content;
+use App\Phine\Database\Core\Content;
 use Phine\Bundles\Core\Logic\Access\Backend\UserGuard;
 
 /**

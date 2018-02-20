@@ -1,8 +1,8 @@
 <?php
 
 namespace Phine\Bundles\Core\Logic\Logging\Interfaces;
-use Phine\Database\Core\Content;
-use Phine\Database\Core\Container;
+use App\Phine\Database\Core\Content;
+use App\Phine\Database\Core\Container;
 /**
  * Interface to retrieve container usage as content
  * Internal, once implemented interface to keep BuiltIn and Core bundles separated

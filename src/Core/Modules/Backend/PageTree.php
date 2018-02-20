@@ -4,8 +4,8 @@ namespace Phine\Bundles\Core\Modules\Backend;
 
 use Phine\Bundles\Core\Logic\Module\BackendModule;
 use Phine\Bundles\Core\Logic\Tree\PageTreeProvider;
-use Phine\Database\Core\Site;
-use Phine\Database\Core\Page;
+use App\Phine\Database\Core\Site;
+use App\Phine\Database\Core\Page;
 use Phine\Framework\System\Http\Request;
 use Phine\Framework\System\Http\Response;
 use Phine\Bundles\Core\Logic\Routing\BackendRouter;

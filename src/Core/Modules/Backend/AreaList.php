@@ -4,8 +4,8 @@ namespace Phine\Bundles\Core\Modules\Backend;
 
 use Phine\Bundles\Core\Logic\Module\BackendModule;
 use Phine\Bundles\Core\Logic\Tree\AreaListProvider;
-use Phine\Database\Core\Area;
-use Phine\Database\Core\Layout;
+use App\Phine\Database\Core\Area;
+use App\Phine\Database\Core\Layout;
 use Phine\Framework\System\Http\Request;
 use Phine\Framework\System\Http\Response;
 use Phine\Bundles\Core\Logic\Routing\BackendRouter;

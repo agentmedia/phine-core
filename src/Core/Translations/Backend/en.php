@@ -409,6 +409,7 @@ $translator->AddTranslation($lang, 'Core.MemberList.OverviewDescription', 'The l
 $translator->AddTranslation($lang, 'Core.PageUrlSelector.NoPage', '- No URL selected -');
 $translator->AddTranslation($lang, 'Core.PageUrlSelector.OpenModal', 'Assign new URL');
 $translator->AddTranslation($lang, 'Core.PageSelector.NoPage', '- No page selected');
+$translator->AddTranslation($lang, 'Core.PageSelector.OpenModal', 'Assign new page');
 
 $translator->AddTranslation($lang, 'Core.AjaxSelectPage.NoPage', '- Unselect URL -');
 $translator->AddTranslation($lang, 'Core.AjaxSelectPage.Submit', 'Continue');
@@ -471,8 +472,10 @@ $translator->AddTranslation($lang, 'Core.MembergroupForm.Name.Validation.Databas
 $translator->AddTranslation($lang, 'Core.SettingsForm.Title', 'Global Settings');
 $translator->AddTranslation($lang, 'Core.SettingsForm.Description', 'Gather global settings for mailing and logging using this form.');
 $translator->AddTranslation($lang, 'Core.SettingsForm.Legend', 'Log & Mail Base settings');
-$translator->AddTranslation($lang, 'Core.SettingsForm.LogLifetime', 'Lifetime Log Items (days)');
+$translator->AddTranslation($lang, 'Core.SettingsForm.LogLifetime', 'Lifetime Log Items in days');
 $translator->AddTranslation($lang, 'Core.SettingsForm.LogLifetime.Validation.Integer.ExceedsMax_{0}', 'The maximum lifetime is {0} days');
+$translator->AddTranslation($lang, 'Core.SettingsForm.ChangeRequestLifetime', 'Lifetime user links (f.e. new password) in days');
+
 $translator->AddTranslation($lang, 'Core.SettingsForm.MailFromEMail', 'Mail Sender E-Mail');
 $translator->AddTranslation($lang, 'Core.SettingsForm.MailFromEMail.Validation.PhpFilter.InvalidEmail', 'Invalid e-mail address');
 $translator->AddTranslation($lang, 'Core.SettingsForm.MailFromName', 'Mail Sender Name');

@@ -1,9 +1,9 @@
 <?php
 
 namespace Phine\Bundles\Core\Logic\Tree;
-use Phine\Database\Core\PageUrlParameter;
-use Phine\Database\Core\PageUrl;
-use Phine\Database\Access;
+use App\Phine\Database\Core\PageUrlParameter;
+use App\Phine\Database\Core\PageUrl;
+use App\Phine\Database\Access;
 
 /**
  * Provider for a list of page url parameters

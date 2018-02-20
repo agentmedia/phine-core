@@ -19,9 +19,15 @@ class ClassFinder
      * @var string The bundle module separator string
      */
     private static $bundleModuleSeparator = '-';
-    static function RootNamespace()
+    static function RootNamespace($bundleName)
     {
-        return "\\Phine";
+        $packageBundles = PathUtil::PackageBundles();
+        if (isset($packageBundles[$bundleName])) {
+            return "\\Phine";
+        } else {
+            return "\\App\\Phine";
+        }
+        
     }
    
     /**
@@ -31,7 +37,7 @@ class ClassFinder
      */
     static function BundleNamespace($bundleName)
     {
-        return self::RootNamespace() . '\\Bundles\\' . $bundleName;
+        return self::RootNamespace($bundleName) . '\\Bundles\\' . $bundleName;
     }
     
     /**

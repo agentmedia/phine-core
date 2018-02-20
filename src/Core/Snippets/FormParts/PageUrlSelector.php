@@ -3,10 +3,10 @@
 namespace Phine\Bundles\Core\Snippets\FormParts;
 
 use Phine\Bundles\Core\Logic\Snippet\TemplateSnippet;
-use Phine\Database\Core\PageUrl;
-use Phine\Database\Core\PageUrlParameter;
-use Phine\Database\Core\Page;
-use Phine\Database\Core\Site;
+use App\Phine\Database\Core\PageUrl;
+use App\Phine\Database\Core\PageUrlParameter;
+use App\Phine\Database\Core\Page;
+use App\Phine\Database\Core\Site;
 use Phine\Bundles\Core\Logic\Tree\PageParamListProvider;
 use Phine\Bundles\Core\Logic\Util\ArrayLinesSerializer;
 use Phine\Bundles\Core\Modules\Backend\AjaxSelectPage;
@@ -17,8 +17,8 @@ use Phine\Framework\FormElements\Interfaces\IFormElement;
 use Phine\Framework\Validation\Interfaces\IValidator;
 use Phine\Framework\FormElements\Fields\Input;
 use Phine\Bundles\Core\Snippets\FormFields\HiddenInputField;
-use Phine\Database\Access;
-use Phine\Framework\System\String;
+use App\Phine\Database\Access;
+use Phine\Framework\System\Str;
 use Phine\Framework\System\Http\Request;
 
 /**
@@ -285,7 +285,7 @@ class PageUrlSelector extends TemplateSnippet implements IFormElement
     private function Value($name)
     {
         $value = Request::PostData($this->prefix . $name);
-        return String::Trim($value);
+        return Str::Trim($value);
     }
 
     /**

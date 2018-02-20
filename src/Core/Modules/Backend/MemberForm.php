@@ -3,18 +3,18 @@ namespace Phine\Bundles\Core\Modules\Backend;
 use Phine\Bundles\Core\Logic\Module\BackendForm;
 use Phine\Framework\System\Http\Request;
 use Phine\Framework\FormElements\Fields\Input;
-use Phine\Database\Core\Member;
+use App\Phine\Database\Core\Member;
 use Phine\Framework\Validation\DatabaseCount;
 use Phine\Framework\Validation\PhpFilter;
 use Phine\Framework\System\Http\Response;
 use Phine\Bundles\Core\Logic\Routing\BackendRouter;
 use Phine\Bundles\Core\Logic\Access\Backend\Enums\BackendAction;
 use Phine\Framework\Validation\StringLength;
-use Phine\Database\Core\Membergroup;
+use App\Phine\Database\Core\Membergroup;
 use Phine\Bundles\Core\Logic\Util\MembergroupUtil;
-use Phine\Database\Core\MemberMembergroup;
-use Phine\Database\Access;
-use Phine\Framework\System\String;
+use App\Phine\Database\Core\MemberMembergroup;
+use App\Phine\Database\Access;
+use Phine\Framework\System\Str;
 use Phine\Bundles\Core\Logic\Logging\Logger;
 use Phine\Bundles\Core\Logic\Logging\Enums\Action;
 
@@ -127,7 +127,7 @@ class MemberForm extends BackendForm
         $password = $this->Value('Password');
         if ($password)
         {
-            $salt = String::Start(md5(uniqid(microtime())), 8);
+            $salt = Str::Start(md5(uniqid(microtime())), 8);
             $pwHash = hash('sha256', $password . $salt);
             $this->member->SetPassword($pwHash);
             $this->member->SetPasswordSalt($salt);

@@ -2,12 +2,12 @@
 namespace Phine\Bundles\Core\Snippets\TreeBranches;
 
 use Phine\Bundles\Core\Logic\Snippet\TemplateSnippet;
-use Phine\Database\Core\Page;
+use App\Phine\Database\Core\Page;
 use Phine\Bundles\Core\Logic\Tree\PageTreeProvider;
 use Phine\Bundles\Core\Logic\Routing\BackendRouter;
 use Phine\Bundles\Core\Modules\Backend\PageForm;
-use Phine\Database\Core\Area;
-use Phine\Database\Access;
+use App\Phine\Database\Core\Area;
+use App\Phine\Database\Access;
 use Phine\Bundles\Core\Modules\Backend\PageContentTree;
 use Phine\Bundles\Core\Logic\Module\BackendModule;
 use Phine\Bundles\Core\Logic\Access\Backend\Enums\BackendAction;

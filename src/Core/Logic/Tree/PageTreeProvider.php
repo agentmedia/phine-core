@@ -1,9 +1,9 @@
 <?php
 
 namespace Phine\Bundles\Core\Logic\Tree;
-use Phine\Database\Core\Page;
-use Phine\Database\Access;
-use Phine\Database\Core\Site;
+use App\Phine\Database\Core\Page;
+use App\Phine\Database\Access;
+use App\Phine\Database\Core\Site;
 
 /**
  * The tree provider for the web pages

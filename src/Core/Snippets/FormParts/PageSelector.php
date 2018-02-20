@@ -3,8 +3,8 @@
 namespace Phine\Bundles\Core\Snippets\FormParts;
 
 use Phine\Bundles\Core\Logic\Snippet\TemplateSnippet;
-use Phine\Database\Core\Page;
-use Phine\Database\Core\Site;
+use App\Phine\Database\Core\Page;
+use App\Phine\Database\Core\Site;
 use Phine\Bundles\Core\Modules\Backend\AjaxSelectPage;
 use Phine\Bundles\Core\Logic\Routing\BackendRouter;
 use Phine\Framework\System\IO\Path;
@@ -12,7 +12,7 @@ use Phine\Framework\FormElements\Interfaces\IFormElement;
 use Phine\Framework\Validation\Interfaces\IValidator;
 use Phine\Framework\FormElements\Fields\Input;
 use Phine\Bundles\Core\Snippets\FormFields\HiddenInputField;
-use Phine\Framework\System\String;
+use Phine\Framework\System\Str;
 use Phine\Framework\System\Http\Request;
 /**
  * Renders the fields for page url selector
@@ -199,6 +199,6 @@ class PageSelector extends TemplateSnippet implements IFormElement
     private function Value($name)
     {
         $value = Request::PostData($this->prefix . $name);
-        return String::Trim($value);
+        return Str::Trim($value);
     }
 }

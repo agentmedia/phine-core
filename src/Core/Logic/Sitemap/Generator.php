@@ -4,10 +4,10 @@ namespace Phine\Bundles\Core\Logic\Sitemap;
 
 use Phine\Framework\Sitemap\XmlGenerator;
 use Phine\Framework\Sitemap\Enums\ChangeFrequency;
-use Phine\Database\Core\Site;
+use App\Phine\Database\Core\Site;
 use Phine\Bundles\Core\Logic\Routing\FrontendRouter;
 use Phine\Bundles\Core\Logic\Tree\PageTreeProvider;
-use Phine\Database\Core\Page;
+use App\Phine\Database\Core\Page;
 use Phine\Bundles\Core\Logic\Access\Frontend\MemberGuard;
 use Phine\Framework\Access\Base\Action;
 use Phine\Bundles\Core\Logic\Util\PathUtil;

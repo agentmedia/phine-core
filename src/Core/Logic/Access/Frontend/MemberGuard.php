@@ -5,10 +5,10 @@ namespace Phine\Bundles\Core\Logic\Access\Frontend;
 use Phine\Framework\Access\Base\Guard;
 use Phine\Framework\Access\Base\Action;
 use Phine\Framework\Access\Base\GrantResult;
-use Phine\Database\Core\Page;
-use Phine\Database\Core\Content;
+use App\Phine\Database\Core\Page;
+use App\Phine\Database\Core\Content;
 use Phine\Bundles\Core\Logic\Util\MembergroupUtil;
-use Phine\Database\Core\Membergroup;
+use App\Phine\Database\Core\Membergroup;
 use Phine\Framework\System\Date;
 use Phine\Bundles\Core\Logic\Util\PublishDateUtil;
 

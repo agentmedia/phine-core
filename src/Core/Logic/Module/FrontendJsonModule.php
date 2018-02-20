@@ -23,7 +23,7 @@ abstract class FrontendJsonModule extends FrontendModule
     
     protected function BeforeGather()
     {
-        \header('Content-Type: application\json');
+        \header('Content-Type: application/json');
         return parent::BeforeGather();
     }
     

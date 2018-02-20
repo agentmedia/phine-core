@@ -1,9 +1,9 @@
 <?php
 namespace Phine\Bundles\Core\Logic\Access\Backend;
-use Phine\Database\Core\Usergroup;
-use Phine\Database\Core\Content;
+use App\Phine\Database\Core\Usergroup;
+use App\Phine\Database\Core\Content;
 use Phine\Bundles\Core\Logic\Tree\ContentTreeUtil;
-use Phine\Database\Core\Page;
+use App\Phine\Database\Core\Page;
 
 
 /**

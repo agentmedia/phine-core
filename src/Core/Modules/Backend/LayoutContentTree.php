@@ -3,8 +3,8 @@
 namespace Phine\Bundles\Core\Modules\Backend;
 use Phine\Bundles\Core\Logic\Module\BackendModule;
 use Phine\Bundles\Core\Logic\Tree\LayoutContentTreeProvider;
-use Phine\Database\Core\Area;
-use Phine\Database\Core\LayoutContent;
+use App\Phine\Database\Core\Area;
+use App\Phine\Database\Core\LayoutContent;
 use Phine\Bundles\Core\Logic\Routing\BackendRouter;
 use Phine\Framework\System\Http\Request;
 use Phine\Bundles\Core\Modules\Backend\LayoutList;

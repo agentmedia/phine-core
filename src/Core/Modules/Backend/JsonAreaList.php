@@ -3,7 +3,7 @@
 namespace Phine\Bundles\Core\Modules\Backend;
 
 use Phine\Bundles\Core\Modules\Backend\Base\JsonTree;
-use Phine\Database\Core\Area;
+use App\Phine\Database\Core\Area;
 use Phine\Bundles\Core\Logic\Tree\AreaListProvider;
 use Phine\Bundles\Core\Logic\Hooks\IDeleteHook;
 use Phine\Bundles\Core\Logic\Module\BackendModule;

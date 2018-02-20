@@ -4,11 +4,11 @@ namespace Phine\Bundles\Core\Modules\Backend;
 
 use Phine\Bundles\Core\Logic\Module\AjaxBackendForm;
 use Phine\Bundles\Core\Logic\Tree\PageTreeProvider;
-use Phine\Database\Core\Site;
-use Phine\Database\Core\Page;
-use Phine\Database\Access;
+use App\Phine\Database\Core\Site;
+use App\Phine\Database\Core\Page;
+use App\Phine\Database\Access;
 use Phine\Framework\System\Http\Request;
-use Phine\Database\Core\PageUrl;
+use App\Phine\Database\Core\PageUrl;
 use Phine\Bundles\Core\Logic\Routing\BackendRouter;
 
 /**

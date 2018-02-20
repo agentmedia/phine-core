@@ -1,9 +1,9 @@
 <?php
 namespace Phine\Bundles\Core\Snippets\TreeBranches;
 
-use Phine\Database\Core\ContainerContent;
+use App\Phine\Database\Core\ContainerContent;
 use Phine\Bundles\Core\Logic\Tree\ContainerContentTreeProvider;
-use Phine\Database\Core\Container;
+use App\Phine\Database\Core\Container;
 use Phine\Bundles\Core\Logic\Module\BackendModule;
 use Phine\Bundles\Core\Logic\Access\Backend\Enums\BackendAction;
 use Phine\Framework\Access\Base\GrantResult;

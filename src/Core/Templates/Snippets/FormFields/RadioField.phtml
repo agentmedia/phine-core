@@ -8,8 +8,8 @@
     <?php foreach ($field->GetOptions() as $value=>$text): ?>
         <?php $labelAttribs = $field->GetLabelAttributes($value);?>
         <label for="<?php HtmlOut($name) ?>-<?php HtmlOut($idx) ?>"<?php foreach($labelAttribs as $attrName=>$attrValue): ?> <?php echo $attrName ?>="<?php echo HtmlOut($attrValue)?>"<?php endforeach; ?>>
-            <?php $fieldAttribs = $field->GetCheckboxAttributes($value); ?>
-            <input name="<?php HtmlOut($name) ?>[]" id="<?php HtmlOut($name) ?>-<?php HtmlOut($idx) ?>" type="checkbox" value="<?php HtmlOut($value) ?>"<?php if ($field->IsSelected($value)): ?> checked="checked"<?php endif; ?><?php foreach($fieldAttribs as $attrName=>$attrValue): ?> <?php echo $attrName ?>="<?php echo HtmlOut($attrValue)?>"<?php endforeach; ?> />
+            <?php $fieldAttribs = $field->GetButtonAttributes($value); ?>
+            <input name="<?php HtmlOut($name) ?>" id="<?php HtmlOut($name) ?>-<?php HtmlOut($idx) ?>" type="radio" value="<?php HtmlOut($value) ?>"<?php if ($field->IsSelected($value)): ?> checked="checked"<?php endif; ?><?php foreach($fieldAttribs as $attrName=>$attrValue): ?> <?php echo $attrName ?>="<?php echo HtmlOut($attrValue)?>"<?php endforeach; ?> />
             <?php HtmlOut($text) ?>
         </label>
     <?php ++$idx; endforeach; ?>

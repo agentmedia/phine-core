@@ -1,7 +1,7 @@
 <?php
 
 namespace Phine\Bundles\Core\Logic\Module;
-use Phine\Database\Core;
+use App\Phine\Database\Core;
 use Phine\Bundles\Core\Logic\Util\PathUtil;
 use Phine\Framework\System\IO\Path;
 use Phine\Bundles\Core\Logic\Tree\IContentTreeProvider;
@@ -9,8 +9,6 @@ use Phine\Bundles\Core\Logic\Tree\LayoutContentTreeProvider;
 use Phine\Bundles\Core\Logic\Tree\PageContentTreeProvider;
 use Phine\Bundles\Core\Logic\Tree\ContainerContentTreeProvider;
 use Phine\Bundles\Core\Logic\Rendering\ContentsRenderer;
-use Phine\Framework\System\Date;
-use Phine\Framework\System\IO\File;
 use Phine\Bundles\Core\Logic\Access\Frontend\MemberGuard;
 use Phine\Bundles\Core\Logic\Caching\FileCacher;
 use Phine\Bundles\Core\Logic\Rendering\PageRenderer;
@@ -219,36 +217,6 @@ abstract class FrontendModule extends TemplateModule
         }
         parent::AfterGather();
     }
-    /**
-     * True if cache file contents must be used
-     * @param strinh $cacheFile The cache file
-     * @return boolean
-     */
-    private function MustUseCache($cacheFile)
-    {
-        $seconds = $this->content->GetCacheLifetime();
-        if ($seconds == 0)
-        {
-            return false;
-        }
-        if (!File::Exists($cacheFile))
-        {
-            return false;
-        }
-        $now = Date::Now();
-        $lastMod = File::GetLastModified($cacheFile);
-        if ($now->TimeStamp() - $lastMod->TimeStamp() < $seconds)
-        {
-            return true;
-        }
-        return false;
-    }
-    
-    private function MustStoreToCache()
-    {
-       return $this->content->GetCacheLifetime() > 0;
-    }
-    
     
     /**
      * The frontend access guard
@@ -268,6 +236,15 @@ abstract class FrontendModule extends TemplateModule
             self::$guard = new MemberGuard();
         }
         return self::$guard;
+    }
+
+    /**
+     * Gets the logged in member, or null if not logged in
+     * @return Core\Member
+     */
+    final public static function Member()
+    {
+        return self::Guard()->GetMember();
     }
     
     /**

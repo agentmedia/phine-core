@@ -1,7 +1,7 @@
 <?php
 
 namespace Phine\Bundles\Core\Logic\Module;
-use Phine\Framework\System\String;
+use Phine\Framework\System\Str;
 
 abstract class AjaxBackendForm extends BackendModule
 {
@@ -9,7 +9,7 @@ abstract class AjaxBackendForm extends BackendModule
     
     protected function RedirectModal($url)
     {
-        $jsUrl = String::ToJavascript($url, false);
+        $jsUrl = Str::ToJavascript($url, false);
         echo "<script>$('#ajax-modal').load($jsUrl);</script>";
         die();
     }
@@ -27,8 +27,8 @@ abstract class AjaxBackendForm extends BackendModule
      */
     protected function SetJSFieldValue($field, $value)
     {
-        $jsField = String::ToJavascript($field, false);
-        $jsValue = String::ToJavascript($value, false);
+        $jsField = Str::ToJavascript($field, false);
+        $jsValue = Str::ToJavascript($value, false);
         echo "<script>$($jsField).val($jsValue);</script>";
     }
     
@@ -39,8 +39,8 @@ abstract class AjaxBackendForm extends BackendModule
      */
     protected function SetJSHtml($element, $html)
     {
-        $jsElement = String::ToJavascript($element, false);
-        $jsHtml = String::ToJavascript($html, false);
+        $jsElement = Str::ToJavascript($element, false);
+        $jsHtml = Str::ToJavascript($html, false);
         echo "<script>$($jsElement).html($jsHtml);</script>";
     }
 }

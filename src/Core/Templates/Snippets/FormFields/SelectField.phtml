@@ -9,7 +9,7 @@
     <?php foreach ($options as $value=>$text): ?>
     <?php $optAttribs = $this->select->GetOptionAttributes($value); ?>
     <?php $selVal = $this->select->GetValue(); ?>
-    <?php $selected = isset($selVal) && is_array($selVal) ? in_array($value, $selVal): $value == $selVal ?>
+    <?php $selected = isset($selVal) && is_array($selVal) ? in_array($value, $selVal): (string)$value === (string)$selVal ?>
     <option value="<?php HtmlOut($value) ?>"<?php if ($selected): ?> selected="selected"<?php endif ?><?php foreach($optAttribs as $name=>$val): ?> <?php echo Html($name) . '="' . Html($val) .'"' ?><?php endforeach;?>><?php HtmlOut($text) ?></option>
     <?php endforeach; ?>
 </select>

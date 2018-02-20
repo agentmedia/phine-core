@@ -1,9 +1,9 @@
 <?php
 namespace Phine\Bundles\Core\Logic\Access\Backend;
 use Phine\Bundles\Core\Logic\Tree\ContentTreeUtil;
-use Phine\Database\Core\BackendPageRights;
-use Phine\Database\Core\Content;
-use Phine\Database\Core\Page;
+use App\Phine\Database\Core\BackendPageRights;
+use App\Phine\Database\Core\Content;
+use App\Phine\Database\Core\Page;
 /**
  * Provides methods to find rights taking into account inheritance
  */
@@ -38,7 +38,7 @@ class RightsFinder
      * @param Content $content The content
      * @return BackendContentRights Returns the assigned content rights
      */
-    private function GetUpperContentRights(Content $content)
+    private static function GetUpperContentRights(Content $content)
     {
         if ($content->GetPageContent())
         {

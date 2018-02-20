@@ -1,8 +1,8 @@
 <?php
 
 namespace Phine\Bundles\Core\Logic\Routing;
-use Phine\Database\Core\Page;
-use Phine\Database\Core\Site;
+use App\Phine\Database\Core\Page;
+use App\Phine\Database\Core\Site;
 
 use Phine\Framework\Webserver\Apache\Htaccess\RewriteRule;
 use Phine\Framework\Webserver\Apache\Htaccess\RewriteCondition;
@@ -10,7 +10,6 @@ use Phine\Framework\Webserver\Apache\Htaccess\Enums\FlagType;
 use Phine\Framework\Webserver\Apache\Htaccess\CommandFlag;
 use Phine\Framework\Webserver\Apache\Htaccess\Variable;
 use Phine\Framework\Webserver\Apache\Enums\ServerVariable;
-use Phine\Framework\System\StringReader;
 use Phine\Framework\Webserver\Apache\Htaccess\Writer;
 use Phine\Framework\Webserver\Apache\Htaccess\CommentLine;
 use Phine\Bundles\Core\Logic\Routing\FrontendRouter;
@@ -129,8 +128,12 @@ class Rewriter
         $siteFolder = parse_url($siteUrl, PHP_URL_PATH);
         if ($siteFolder != '' && $siteFolder != '/')
         {
-            return new RewriteCondition(new Variable(ServerVariable::RequestUri()), '^' . $siteFolder);
+            return new RewriteCondition(new Variable(ServerVariable::RequestUri()), '^' . rtrim($siteFolder, '/') . '/');
         }
+        else
+        {
+            return new RewriteCondition(new Variable(ServerVariable::RequestUri()), '^/');
+        } 
         return null;
     }
     /**
@@ -141,13 +144,13 @@ class Rewriter
      */
     private function PageRule(Page $page, array $params)
     {
-        $lhs = '/' . $page->GetUrl();
+        $lhs = $page->GetUrl();
         foreach ($params as $param)
         {
             $lhs = str_replace('{' . $param . '}', self::PARAM_PATTERN, $lhs);
         }
         
-        $rhs = new Variable(ServerVariable::RequestUri());
+        $rhs = 'index.php';
         $idx = 1;
         
         foreach ($params as $param)
@@ -159,6 +162,7 @@ class Rewriter
         $rhs .= '&' . self::PAGE_URL_PARAM . '=' . $page->GetUrl();
         $rule = new RewriteRule($lhs, $rhs);
         $rule->AddFlag(new CommandFlag(FlagType::Qsa()));
+        $rule->AddFlag(new CommandFlag(FlagType::L()));
         return $rule;
     }
     /**

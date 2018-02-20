@@ -2,7 +2,7 @@
 
 namespace Phine\Bundles\Core\Modules\Backend;
 use Phine\Bundles\Core\Logic\Module\AjaxBackendForm;
-use Phine\Database\Core\Page;
+use App\Phine\Database\Core\Page;
 use Phine\Framework\System\Http\Request;
 use Phine\Bundles\Core\Logic\Routing\FrontendRouter;
 use Phine\Framework\FormElements\Fields\Input;
@@ -66,7 +66,7 @@ class AjaxPageParams extends AjaxBackendForm
         {
             $field = Input::Text($name, isset($this->params[$name]) ? $this->params[$name] : '');
             $this->AddField($field, false, $name);
-            $this->SetRequired($name, 'Core.AjaxPageParams.Param.');
+            //$this->SetRequired($name, 'Core.AjaxPageParams.Param.');
         }
     }
     
@@ -112,7 +112,9 @@ class AjaxPageParams extends AjaxBackendForm
         $allParams = array();
         foreach ($this->oblParams as $param)
         {
-            $allParams[$param] = $this->Value($param);
+            if ($this->Value($param)) {
+                $allParams[$param] = $this->Value($param);
+            }
         }
         $optParams = $this->serializer->LinesToArray($this->Value('OptionalParameters'));
         foreach ($optParams as $name=>$value)

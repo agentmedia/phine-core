@@ -1,9 +1,9 @@
 <?php
 
 namespace Phine\Bundles\Core\Logic\Config;
-use Phine\Database\Core\Settings;
-use Phine\Database\Core\User;
-use Phine\Database\Access;
+use App\Phine\Database\Core\Settings;
+use App\Phine\Database\Core\User;
+use App\Phine\Database\Access;
 
 /**
  * Proxy for the settings; use this instead of settings directly to assure there is exactly one settings database entry
@@ -61,6 +61,7 @@ class SettingsProxy
     {
         $this->settings = new Settings();
         $this->settings->SetLogLifetime(90);
+        $this->settings->SetChangeRequestLifetime(30);
         $this->settings->SetSmtpSecurity((string)Enums\SmtpSecurity::None());
         $admin = $this->FirstAdmin();
         if ($admin)

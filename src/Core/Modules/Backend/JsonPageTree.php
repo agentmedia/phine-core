@@ -3,7 +3,7 @@
 namespace Phine\Bundles\Core\Modules\Backend;
 
 use Phine\Bundles\Core\Modules\Backend\Base\JsonTree;
-use Phine\Database\Core\Page;
+use App\Phine\Database\Core\Page;
 use Phine\Bundles\Core\Logic\Tree\PageTreeProvider;
 use Phine\Framework\Webserver\Apache\Htaccess\Writer;
 use Phine\Bundles\Core\Logic\Routing\Rewriter;
@@ -13,8 +13,8 @@ use Phine\Bundles\Core\Logic\Hooks\IDeleteHook;
 use Phine\Bundles\Core\Logic\Logging\Logger;
 use Phine\Bundles\Core\Logic\Logging\Enums\Action;
 use Phine\Bundles\Core\Logic\Module\BackendModule;
-use Phine\Database\Core\PageUrl;
-use Phine\Database\Access;
+use App\Phine\Database\Core\PageUrl;
+use App\Phine\Database\Access;
 use Phine\Framework\Database\Sql\JoinType;
 
 class JsonPageTree extends JsonTree

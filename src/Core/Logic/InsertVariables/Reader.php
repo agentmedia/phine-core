@@ -1,7 +1,7 @@
 <?php
 
 namespace Phine\Bundles\Core\Logic\InsertVariables;
-use Phine\Framework\System\String;
+use Phine\Framework\System\Str;
 
 class Reader
 {
@@ -87,7 +87,7 @@ class Reader
     {
         $params = array();
         $trimString = trim(substr($tokenString, $nextStop));
-        if (!String::StartsWith(self::ParamsStart, $trimString))
+        if (!Str::StartsWith(self::ParamsStart, $trimString))
         {
             return $params;
         }
@@ -142,7 +142,7 @@ class Reader
         {
             return $filters;
         }
-        if (!String::StartsWith(self::FilterSeparator, $trimString))
+        if (!Str::StartsWith(self::FilterSeparator, $trimString))
         {
             return false;
         }
@@ -162,7 +162,7 @@ class Reader
     private function ParseProperty($tokenString, &$nextStop)
     {
         $trimString = trim(substr($tokenString, $nextStop));
-        if (!String::StartsWith(self::PropertySeparator, $trimString))
+        if (!Str::StartsWith(self::PropertySeparator, $trimString))
         {
             return false;
         }

@@ -406,6 +406,7 @@ $translator->AddTranslation($lang, 'Core.MemberList.OverviewDescription', 'Die L
 $translator->AddTranslation($lang, 'Core.PageUrlSelector.NoPage', '- Keine URL ausgewählt -');
 $translator->AddTranslation($lang, 'Core.PageUrlSelector.OpenModal', 'Neue URL zuweisen');
 $translator->AddTranslation($lang, 'Core.PageSelector.NoPage', '- Keine Seite ausgewählt -');
+$translator->AddTranslation($lang, 'Core.PageSelector.OpenModal', 'Neue Seite zuweisen');
 
 $translator->AddTranslation($lang, 'Core.AjaxSelectPage.NoPage', '- Seitenauswahl aufheben -');
 $translator->AddTranslation($lang, 'Core.AjaxSelectPage.Submit', 'Weiter');
@@ -468,8 +469,9 @@ $translator->AddTranslation($lang, 'Core.MembergroupForm.Name.Validation.Databas
 $translator->AddTranslation($lang, 'Core.SettingsForm.Title', 'Globale Einstellungen');
 $translator->AddTranslation($lang, 'Core.SettingsForm.Description', 'Stellen Sie hier globale Einstellungen für Mailing und Logging zusammen.');
 $translator->AddTranslation($lang, 'Core.SettingsForm.Legend', 'Log & Mail-Basiseinstellungen');
-$translator->AddTranslation($lang, 'Core.SettingsForm.LogLifetime', 'Lebensdauer Logeinträge (in Tagen)');
+$translator->AddTranslation($lang, 'Core.SettingsForm.LogLifetime', 'Lebensdauer Logeinträge; in Tagen');
 $translator->AddTranslation($lang, 'Core.SettingsForm.LogLifetime.Validation.Integer.ExceedsMax_{0}', 'Die Lebensdauer beträgt maximal {0} Tage');
+$translator->AddTranslation($lang, 'Core.SettingsForm.ChangeRequestLifetime', 'Lebensdauer Userlinks (z.B. Neues Passwort); in Tagen');
 $translator->AddTranslation($lang, 'Core.SettingsForm.MailFromEMail', 'Absender-E-Mailadresse');
 $translator->AddTranslation($lang, 'Core.SettingsForm.MailFromEMail.Validation.PhpFilter.InvalidEmail', 'Diese Mailadresse ist ungültig');
 $translator->AddTranslation($lang, 'Core.SettingsForm.MailFromName', 'Absendername bei Mailversand');

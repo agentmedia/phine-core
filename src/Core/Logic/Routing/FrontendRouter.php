@@ -1,19 +1,23 @@
 <?php
+
 namespace Phine\Bundles\Core\Logic\Routing;
+
 use Phine\Framework\System\StringReader;
-use Phine\Database\Core\Page;
+use App\Phine\Database\Core\Page;
 use Phine\Framework\System\IO\Path;
-use Phine\Database\Core\PageUrl;
+use App\Phine\Database\Core\PageUrl;
 use Phine\Bundles\Core\Logic\Tree\PageParamListProvider;
-use Phine\Database\Access;
-use Phine\Database\Core\Site;
+use App\Phine\Database\Access;
+use App\Phine\Database\Core\Site;
 use Phine\Bundles\Core\Logic\DBEnums\PageType;
-    
+use Phine\Framework\System\Http\Request;
+
 /**
  * Router for frontend urls
  */
 class FrontendRouter
 {
+
     /**
      * Gathers the obligatory parameters from the url
      * @param string $url The page url
@@ -25,25 +29,22 @@ class FrontendRouter
         $param = '';
         $params = array();
         $start = false;
-        while (false !== ($ch = $reader->ReadChar()))
-        {
-            if ($ch == '{')
-            {
+        while (false !== ($ch = $reader->ReadChar())) {
+            if ($ch == '{') {
                 $start = true;
             }
-            else if ($ch == '}' && $start)
-            {
+            else if ($ch == '}' && $start) {
                 $params[] = $param;
                 $param = '';
                 $start = false;
             }
-            else if ($start)
-            {
+            else if ($start) {
                 $param .= $ch;
             }
         }
         return $params;
     }
+
     /**
      * Returns the url of a page with parameters and fragment
      * @param Page $page The page
@@ -54,22 +55,20 @@ class FrontendRouter
     {
         $siteUrl = $page->GetSite()->GetUrl();
         $pageUrl = $page->GetUrl();
-        if ($pageUrl == 'index.html')
-        {
+        if ($pageUrl == 'index.html') {
             $url = $siteUrl;
         }
-        else
-        {
+        else {
             $url = Path::Combine($siteUrl, $pageUrl);
         }
-        
+
         $oblParams = self::GatherParams($url);
         $urlObl = self::AttachObligatoryParams($url, $oblParams, $params);
-        
+
         $urlAllParams = self::AttachMoreParams($urlObl, $oblParams, $params);
         return $fragment ? $urlAllParams . '#' . $fragment : $urlAllParams;
     }
-    
+
     /**
      * Gets the url for a page url entity
      * @param PageUrl $pageUrl The page url as stored in the database
@@ -80,13 +79,12 @@ class FrontendRouter
     {
         $list = new PageParamListProvider($pageUrl);
         $params = $list->ToArray();
-        foreach ($additionalParameters as $key=>$value)
-        {
-            $params[$key]= $value;
+        foreach ($additionalParameters as $key => $value) {
+            $params[$key] = $value;
         }
         return self::PageUrl($pageUrl->GetPage(), $params, $pageUrl->GetFragment());
     }
-    
+
     /**
      * Attaches obligatory parameters
      * @param string $url The url pattern as given by the associated page property
@@ -97,17 +95,22 @@ class FrontendRouter
      */
     private static function AttachObligatoryParams($url, array $oblParams, array $params)
     {
-        foreach ($oblParams as $oblParam)
-        {
-            if (!array_key_exists($oblParam, $params))
-            { 
-                throw new \LogicException("Page url $url requires parameter $oblParam");
+        foreach ($oblParams as $oblParam) {
+
+            $value = '';
+            if (!array_key_exists($oblParam, $params)) {
+                $value = Request::GetData($oblParam);
             }
-            $url = str_replace('{' . $oblParam . '}', $params[$oblParam], $url);
+            else {
+                $value = $params[$oblParam];
+            }
+            if ($value) {
+                $url = str_replace('{' . $oblParam . '}', $value, $url);
+            }
         }
         return $url;
     }
-    
+
     /**
      * Attaches none oblique url paramters
      * @param string $url The url with obligatory parameters already attached
@@ -118,19 +121,17 @@ class FrontendRouter
     private static function AttachMoreParams($url, array $oblParams, array $params)
     {
         $moreParams = array();
-        foreach ($params as $key=>$value)
-        {
-            if (!in_array($key, $oblParams))
-            {
+        foreach ($params as $key => $value) {
+            if (!in_array($key, $oblParams)) {
                 $moreParams[$key] = $value;
             }
         }
-        if (count($moreParams))
-        {
+        if (count($moreParams)) {
             $url .= '?' . http_build_query($moreParams, null, '&');
         }
         return $url;
     }
+
     /**
      * Finds the 404 page for a site
      * @param Site $site The site whise 404 page is searched for
@@ -140,10 +141,10 @@ class FrontendRouter
     {
         $sql = Access::SqlBuilder();
         $tblPage = Page::Schema()->Table();
-        $where = $sql->Equals($tblPage->Field('Type'), $sql->Value((string)PageType::NotFound()))
+        $where = $sql->Equals($tblPage->Field('Type'), $sql->Value((string) PageType::NotFound()))
                 ->And_($sql->Equals($tblPage->Field('Site'), $sql->Value($site->GetID())));
-        
+
         return Page::Schema()->First($where);
     }
-}
 
+}
