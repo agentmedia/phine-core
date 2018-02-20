@@ -1,9 +1,7 @@
 <?php
 namespace Phine\Bundles\Core\Logic\Installation\InstallUtil;
-use Phine\Framework\System\IO\Path;
-
 /**
- * Represents a pahe
+ * Represents a page in the install tool
  */
 class Page
 {
@@ -71,7 +69,4 @@ class Page
         require __DIR__ . '/Templates/Page.phtml';
         return ob_get_clean();
     }
-    
 }
-
-
