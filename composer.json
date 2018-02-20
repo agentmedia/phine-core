@@ -3,6 +3,7 @@
     "description": "The core bundle for the Phine CMS, including base backend functionality and an installer",
     "license": "Apache-2.0",
     "type": "phine-bundle",
+    "version": "1.2.3",
     "homepage": "https://github.com/agentmedia/phine-core",
     "authors": [
         {
