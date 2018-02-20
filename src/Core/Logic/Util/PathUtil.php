@@ -102,6 +102,9 @@ class PathUtil
         $result = array();
         $modulesFolder = Path::Combine(self::BundleFolder($bundleName), 'Modules');
         $folder = Path::Combine($modulesFolder, (string)$location);
+        if (!Folder::Exists($folder)) {
+            return $result;
+        }
         $files = Folder::GetFiles($folder);
         foreach ($files as $file)
         {
