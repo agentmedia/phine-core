@@ -1,7 +1,7 @@
 <?php
 
 namespace Phine\Bundles\Core\Logic\Logging;
-use App\Phine\Framework\System\Date;
+use Phine\Framework\System\Date;
 use App\Phine\Database\Core\Site;
 use App\Phine\Database\Core\Page;
 use App\Phine\Database\Core\Area;
