@@ -13,7 +13,7 @@ class Manifest extends BundleManifest
      */
     public function Version()
     {
-        return '1.2.3';
+        return '1.2.4';
     }
     
     /**
@@ -31,8 +31,8 @@ class Manifest extends BundleManifest
     public function Manufacturer()
     {
         $myCompany = BundleManufacturer::Company('agent media - Klaus Potzesny');
-        $myCompany->SetEMail('info@agent-media.de');
-        $myCompany->SetUrl('http://agent-media.de');
+        $myCompany->SetEMail('info@agent-media.com');
+        $myCompany->SetUrl('http://agent-media.com');
         $myCompany->SetZip('50354');
         $myCompany->SetCountry('Deutschland');
         $myCompany->SetTown('Hürth');

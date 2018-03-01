@@ -132,7 +132,7 @@ class PageRenderer
         self::$Title .= $appendix;
     }
     
-    static function AppendToDescriptoin($appendix)
+    static function AppendToDescription($appendix)
     {
         self::$Description .= $appendix;
     }
