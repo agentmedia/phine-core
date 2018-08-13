@@ -128,7 +128,7 @@ class Replacer {
     private function ReplaceSiteToken(Token $token, $startPos, &$endPos) {
         $site = $this->FindSite($token);
 
-        switch ($token->Type) {
+        switch ($token->Property) {
             case 'url':
                 $this->ReplaceSiteUrl($site, $token, $startPos, $endPos);
                 break;
