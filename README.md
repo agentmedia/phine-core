@@ -24,3 +24,7 @@ In detail, the phine core includes the following things.
 
 - Corrected Spelling of PageRenderer::AppendToDescription (!Caution: Update your code to new signature!)
 - Corrected company settings to more appropriate website
+
+=== 1.2.5 ===
+
+- Added new {{site::url}} insert variable

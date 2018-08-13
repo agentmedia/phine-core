@@ -376,6 +376,7 @@ $translator->AddTranslation($lang, 'Core.ButtonText.Back', 'Back');
 
 //exception error texts
 $translator->AddTranslation($lang, 'Core.Replacer.Error.PageNotFound.ID_{0}', 'Error replacing page variable: page {0} not found');
+$translator->AddTranslation($lang, 'Core.Replacer.Error.SiteNotFound.ID_{0}', 'Error replacing page variable: website {0} not found');
 $translator->AddTranslation($lang, 'Core.Replacer.Error.FilterNotFound.Name_{0}', 'Error replacing page variable: filter function {0} doesn´t exist');
 $translator->AddTranslation($lang, 'Core.Form.Error.ElementNotFound.Name_{0}', "Attempt to render form element '{0}', which is not part of this form");
 $translator->AddTranslation($lang, 'Core.CacheKey.Error.NotAlphaNumeric', 'Cache keys must be alphanumeric');

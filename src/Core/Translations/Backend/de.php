@@ -374,6 +374,7 @@ $translator->AddTranslation($lang, 'Core.ButtonText.Back', 'Zurück');
 
 //exception error texts
 $translator->AddTranslation($lang, 'Core.Replacer.Error.PageNotFound.ID_{0}', 'Fehler beim Ersetzen einer Seitenvariable: Seite {0} nicht gefunden');
+$translator->AddTranslation($lang, 'Core.Replacer.Error.SiteNotFound.ID_{0}', 'Fehler beim Ersetzen einer Seitenvariable: Website {0} nicht gefunden');
 $translator->AddTranslation($lang, 'Core.Replacer.Error.FilterNotFound.Name_{0}', 'Error replacing einer Seitenvariable: Filterfunktion {0} existiert nicht');
 $translator->AddTranslation($lang, 'Core.Form.Error.ElementNotFound.Name_{0}', "Es wurde versucht das undefinierte Formelement namens '{0}' aufzurufen.");
 $translator->AddTranslation($lang, 'Core.CacheKey.Error.NotAlphaNumeric', 'Cache-Keys dürfen nur aus Zahlen und Buchstaben bestehen');
