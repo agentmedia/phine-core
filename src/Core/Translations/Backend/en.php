@@ -56,6 +56,7 @@ $translator->AddTranslation($lang, 'Core.SiteForm.Description', 'You can adjust 
 $translator->AddTranslation($lang, 'Core.SiteForm.Legend', 'Website Settings');
 $translator->AddTranslation($lang, 'Core.SiteForm.Name', 'Name');
 $translator->AddTranslation($lang, 'Core.SiteForm.Url', 'URL');
+$translator->AddTranslation($lang, 'Core.SiteForm.BaseUrl', 'Base URL');
 $translator->AddTranslation($lang, 'Core.SiteForm.NoGroup', '-- No group --');
 $translator->AddTranslation($lang, 'Core.SiteForm.UserGroup', 'Owner Group & Rights');
 $translator->AddTranslation($lang, 'Core.SiteForm.Submit', 'Save');

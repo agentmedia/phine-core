@@ -39,6 +39,7 @@ class SiteForm extends BackendForm
         $this->siteRights = new SiteRights($this->site->GetUserGroupRights());
         $this->AddNameField();
         $this->AddUrlField();
+        $this->AddBaseUrlField();
         $this->AddLanguageField();
         $this->AddSubmit();
         $this->AddUserGroupField();
@@ -74,6 +75,15 @@ class SiteForm extends BackendForm
         $this->AddField(Input::Text($name, $this->site->GetUrl()));
         $this->SetRequired($name);
         $this->AddValidator($name, PhpFilter::Url());
+    }
+    
+     /**
+     * Adds the url field to the form
+     */
+    private function AddBaseUrlField()
+    {
+        $name = 'BaseUrl';
+        $this->AddField(Input::Text($name, $this->site->GetBaseUrl()));
     }
     
     /**
@@ -112,6 +122,7 @@ class SiteForm extends BackendForm
         }
         $this->site->SetName($this->Value('Name'));
         $this->site->SetUrl($this->Value('Url'));
+        $this->site->SetBaseUrl($this->Value('BaseUrl'));
         $this->site->SetLanguage(Language::Schema()->ByID($this->Value('Language')));
         $this->site->SetSitemapActive((bool)$this->Value('SitemapActive'));
         $this->site->SetSitemapCacheLifetime((int)$this->Value('SitemapCacheLifetime'));

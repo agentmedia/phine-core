@@ -132,11 +132,24 @@ class Replacer {
             case 'url':
                 $this->ReplaceSiteUrl($site, $token, $startPos, $endPos);
                 break;
+            
+            case 'baseUrl':
+                $this->ReplaceSiteBaseUrl($site, $token, $startPos, $endPos);
+                break;
         }
     }
 
     private function ReplaceSiteUrl(Site $site, Token $token, $startPos, &$endPos) {
         $this->InsertValue($site->GetUrl(), $token, $startPos, $endPos);
+    }
+    
+    private function ReplaceSiteBaseUrl(Site $site, Token $token, $startPos, &$endPos) {
+        $baseUrl = $site->GetBaseUrl();
+        if (!$baseUrl) {
+            $baseUrl = Path::Directory($site->GetUrl()) . '/';
+        }
+         
+        $this->InsertValue($baseUrl, $token, $startPos, $endPos);
     }
 
     private function FindSite(Token $token) {

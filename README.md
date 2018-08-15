@@ -28,3 +28,11 @@ In detail, the phine core includes the following things.
 === 1.2.5 ===
 
 - Added new {{site::url}} insert variable
+
+== 1.2.6 ===
+
+- Correcction on site url
+
+== 1.2.7 ==
+
+- Introducing site base url, common usage <base href="{{site::baseUrl}}" />, should be used instead site::url

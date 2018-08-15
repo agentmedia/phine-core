@@ -54,6 +54,7 @@ $translator->AddTranslation($lang, 'Core.SiteForm.Description', 'Sie können hie
 $translator->AddTranslation($lang, 'Core.SiteForm.Legend', 'Website-Einstellungen');
 $translator->AddTranslation($lang, 'Core.SiteForm.Name', 'Name');
 $translator->AddTranslation($lang, 'Core.SiteForm.Url', 'URL');
+$translator->AddTranslation($lang, 'Core.SiteForm.BaseUrl', 'Base URL');
 $translator->AddTranslation($lang, 'Core.SiteForm.NoGroup', '-- Keine Usergruppe --');
 $translator->AddTranslation($lang, 'Core.SiteForm.UserGroup', 'Eigentümer-Gruppe & Berechtigungen');
 $translator->AddTranslation($lang, 'Core.SiteForm.Submit', 'Speichern');
