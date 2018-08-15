@@ -36,3 +36,8 @@ In detail, the phine core includes the following things.
 == 1.2.7 ==
 
 - Introducing site base url, common usage <base href="{{site::baseUrl}}" />, should be used instead site::url
+
+
+== 1.2.8 ==
+
+- More intelligent guess for site base url in case it is not set

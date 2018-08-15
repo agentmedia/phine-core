@@ -146,7 +146,16 @@ class Replacer {
     private function ReplaceSiteBaseUrl(Site $site, Token $token, $startPos, &$endPos) {
         $baseUrl = $site->GetBaseUrl();
         if (!$baseUrl) {
-            $baseUrl = Path::Directory($site->GetUrl()) . '/';
+            //intelligent guess for base url
+            $siteUrl = rtrim($site->GetUrl(), '/');
+            if (trim(parse_url($siteUrl, PHP_URL_PATH)) !== '') {
+                //most likely for local sites or language subfolders: take site url´s parent directory
+                $baseUrl = Path::Directory($siteUrl) . '/';
+            }
+            else {
+                //for simple urls without any folder path like https://example.com
+                $baseUrl = $siteUrl . '/';
+            }
         }
          
         $this->InsertValue($baseUrl, $token, $startPos, $endPos);
